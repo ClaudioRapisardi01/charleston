@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio - Charleston</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #FFD700;
+            --gold-dark: #B8860B;
+            --gold-light: #FFEF94;
+            --black: #000000;
+            --dark-gray: #111111;
+            --medium-gray: #222222;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background: var(--black);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background System */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
+
+        .bg-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, rgba(255, 215, 0, 0.02) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(255, 215, 0, 0.02) 100%);
+            background-size: 80px 80px;
+            animation: meshMove 30s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes meshMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-80px, -80px); }
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(25px) saturate(180%);
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 200;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--gold);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.05) 0%, 
+                transparent 50%, 
+                rgba(255, 215, 0, 0.03) 100%
+            );
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .studio-btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .studio-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, 
+                rgba(17, 17, 17, 0.9),
+                rgba(34, 34, 34, 0.8)
+            );
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 215, 0, 0.1), 
+                transparent
+            );
+            transition: left 0.8s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, 
+                var(--dark-gray), 
+                var(--medium-gray)
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .service-price {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .service-price span {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+        }
+
+        .service-description {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .service-card.expanded .service-description {
+            max-height: 200px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .expand-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--gold);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card.expanded .expand-indicator {
+            transform: rotate(45deg);
+            background: rgba(255, 215, 0, 0.3);
+        }
+
+        /* Studio Gallery Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            background: var(--dark-gray);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: var(--medium-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .services {
+                padding: 60px 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                margin: 0 0.5rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                margin: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background System -->
+    <div class="bg-container">
+        <div class="bg-mesh"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CHARLESTON</a>
+            <a href="index.html" class="back-btn">← Torna alla Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Il Nostro Studio</h1>
+            <p>Uno spazio elegante e professionale dedicato alla danza e al movimento artistico</p>
+            <button class="studio-btn" onclick="openStudioGallery()">
+                📸 Guarda lo Studio
+            </button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2>I Nostri Servizi</h2>
+        
+        <div class="services-grid">
+            <div class="service-card" onclick="toggleCard(this)">
+                <div class="service-image">
+                    <img src="src/img/chitarra.jpg" alt="Lezioni Private">
+                    <div class="expand-indicator">+</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Lezioni di Chitarra</h3>
+                    <div class="service-price">€45 <span>a partire da</span></div>
+                    <div class="service-description">
+                        Lezioni individuali personalizzate per tutti i livelli. Il nostro approccio one-on-one ti permette di progredire rapidamente, concentrandoti sui tuoi obiettivi specifici. Ogni sessione è cucita su misura per le tue esigenze, dal principiante assoluto al ballerino esperto che vuole perfezionare la propria tecnica.
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card" onclick="toggleCard(this)">
+                <div class="service-image">
+                    <img src="src/img/basso.jpg" alt="Coppie">
+                    <div class="expand-indicator">+</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Basso</h3>
+                    <div class="service-price">€70 <span>a partire da</span></div>
+                    <div class="service-description">
+                        Perfetto per coppie che vogliono condividere la passione per la danza. Imparerete a muovervi in sintonia, a comunicare attraverso il movimento e a creare una connessione speciale. Ideale per matrimoni, anniversari o semplicemente per divertirsi insieme.
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card" onclick="toggleCard(this)">
+                <div class="service-image">
+                    <img src="src/img/batteria.jpg" alt="Gruppo">
+                    <div class="expand-indicator">+</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Batteria</h3>
+                    <div class="service-price">€25 <span>a partire da</span></div>
+                    <div class="service-description">
+                        L'energia del gruppo rende l'apprendimento ancora più divertente! Corsi per piccoli gruppi dove potrai socializzare, imparare nuove coreografie e migliorare in un ambiente stimolante e supportivo. Perfetto per chi ama l'aspetto sociale della danza.
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card" onclick="toggleCard(this)">
+                <div class="service-image">
+                    <img src="src/img/microfono.jpg" alt="Coreografie">
+                    <div class="expand-indicator">+</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Voce</h3>
+                    <div class="service-price">€150 <span>a partire da</span></div>
+                    <div class="service-description">
+                        Creiamo coreografie uniche per i tuoi eventi speciali. Matrimoni, compleanni, esibizioni o competizioni: ogni coreografia è studiata appositamente per te, considerando il tuo stile, le tue capacità e l'occasione particolare.
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card" onclick="toggleCard(this)">
+                <div class="service-image">
+                    <img src="src/img/coro.jpg" alt="Workshop">
+                    <div class="expand-indicator">+</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Coro</h3>
+                    <div class="service-price">€80 <span>a partire da</span></div>
+                    <div class="service-description">
+                        Sessioni intensive di 3-4 ore per approfondire stili specifici o tecniche avanzate. Perfetti per chi vuole fare un salto di qualità in poco tempo o esplorare nuovi generi di danza. Include materiale didattico e video di supporto.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Gallery Modal -->
+    <div class="modal" id="studioModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeStudioGallery()">&times;</span>
+            <h2 style="color: var(--gold); margin-bottom: 1rem;">Il Nostro Studio</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1594736797933-d0f06ba52984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle service card expansion
+        function toggleCard(card) {
+            // Close all other cards
+            document.querySelectorAll('.service-card').forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('expanded');
+                }
+            });
+            
+            // Toggle current card
+            card.classList.toggle('expanded');
+        }
+
+        // Studio gallery modal functions
+        function openStudioGallery() {
+            document.getElementById('studioModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeStudioGallery() {
+            document.getElementById('studioModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('studioModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeStudioGallery();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeStudioGallery();
+            }
+        });
+
+        // Smooth scroll for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
