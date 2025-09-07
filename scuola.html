@@ -18,6 +18,8 @@
             --black: #000000;
             --dark-gray: #111111;
             --medium-gray: #222222;
+            --green: #10B981;
+            --green-dark: #059669;
         }
 
         body {
@@ -26,9 +28,35 @@
             color: #ffffff;
             overflow-x: hidden;
             line-height: 1.6;
+            cursor: none;
         }
 
-        /* Background System */
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+        }
+
+        /* Advanced Background System */
         .bg-container {
             position: fixed;
             top: 0;
@@ -45,16 +73,109 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(90deg, transparent 98%, rgba(255, 215, 0, 0.02) 100%),
-                linear-gradient(0deg, transparent 98%, rgba(255, 215, 0, 0.02) 100%);
-            background-size: 80px 80px;
-            animation: meshMove 30s linear infinite;
-            opacity: 0.3;
+                linear-gradient(90deg, transparent 98%, rgba(255, 215, 0, 0.03) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(255, 215, 0, 0.03) 100%);
+            background-size: 100px 100px;
+            animation: meshMove 25s linear infinite;
+            opacity: 0.4;
         }
 
+        .bg-orbs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold), transparent);
+            filter: blur(40px);
+            animation: orbFloat 15s ease-in-out infinite;
+        }
+
+        .orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+            opacity: 0.1;
+        }
+
+        .orb:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -100px;
+            animation-delay: -5s;
+            opacity: 0.08;
+        }
+
+        .orb:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: -200px;
+            left: 30%;
+            animation-delay: -10s;
+            opacity: 0.06;
+        }
+
+        .bg-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        /* Animations */
         @keyframes meshMove {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(-80px, -80px); }
+            100% { transform: translate(-100px, -100px); }
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 0.1;
+            }
+            25% { 
+                transform: translate(30px, -20px) scale(1.1);
+                opacity: 0.15;
+            }
+            50% { 
+                transform: translate(-20px, 30px) scale(0.9);
+                opacity: 0.08;
+            }
+            75% { 
+                transform: translate(40px, 10px) scale(1.05);
+                opacity: 0.12;
+            }
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
         }
 
         /* Enhanced Navbar */
@@ -62,12 +183,18 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(25px) saturate(180%);
             padding: 1.5rem 3rem;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 215, 0, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 1rem 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
@@ -85,6 +212,22 @@
             letter-spacing: 4px;
             text-decoration: none;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .logo:hover::after {
+            width: 100%;
         }
 
         .back-btn {
@@ -97,6 +240,23 @@
             font-weight: 400;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .back-btn:hover::before {
+            left: 100%;
         }
 
         .back-btn:hover {
@@ -105,10 +265,14 @@
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
         }
 
-        /* Hero Section */
+        /* Hero Section with Parallax */
         .hero {
-            padding: 120px 0 80px;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            position: relative;
             background: linear-gradient(135deg, 
                 rgba(255, 215, 0, 0.05) 0%, 
                 transparent 50%, 
@@ -117,31 +281,45 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
+            font-size: 4.5rem;
+            font-weight: 200;
             color: var(--gold);
-            margin-bottom: 1rem;
-            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 4px;
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero .subtitle {
+            font-size: 1.4rem;
             color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
-        .studio-btn {
+        .hero-actions {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .primary-btn {
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             color: var(--black);
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -149,53 +327,116 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .studio-btn:hover {
+        .primary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .primary-btn:hover::before {
+            left: 100%;
+        }
+
+        .primary-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
         }
 
-        /* Services Section */
-        .services {
-            padding: 80px 0;
+        .secondary-btn {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(10px);
+        }
+
+        .secondary-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Studio Features Section */
+        .features-section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .features-grid {
             max-width: 1400px;
             margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        .services h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 3rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .services-grid {
+            padding: 0 2rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 3rem;
         }
 
-        .service-card {
+        .feature-card {
             background: linear-gradient(145deg, 
                 rgba(17, 17, 17, 0.9),
                 rgba(34, 34, 34, 0.8)
             );
-            border-radius: 20px;
-            overflow: hidden;
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255, 215, 0, 0.1);
             backdrop-filter: blur(20px);
             position: relative;
+            overflow: hidden;
         }
 
-        .service-card::before {
+        .feature-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -210,23 +451,85 @@
             transition: left 0.8s ease;
         }
 
-        .service-card:hover::before {
+        .feature-card:hover::before {
             left: 100%;
         }
 
-        .service-card:hover {
-            transform: translateY(-8px) scale(1.02);
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
             border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotateY(180deg);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 120px 0;
+            background: rgba(17, 17, 17, 0.3);
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, 
+                rgba(17, 17, 17, 0.95),
+                rgba(34, 34, 34, 0.9)
+            );
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.2);
         }
 
         .service-image {
             width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, 
-                var(--dark-gray), 
-                var(--medium-gray)
-            );
+            height: 280px;
+            background: linear-gradient(135deg, var(--dark-gray), var(--medium-gray));
             position: relative;
             overflow: hidden;
         }
@@ -235,72 +538,100 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
         .service-card:hover .service-image img {
             transform: scale(1.1);
         }
 
-        .service-content {
-            padding: 1.5rem;
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .service-title {
-            font-size: 1.4rem;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+        .service-card:hover .service-overlay {
+            opacity: 1;
         }
 
         .service-price {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            margin-bottom: 1rem;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 215, 0, 0.9);
+            color: var(--black);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
 
-        .service-price span {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
+        .service-content {
+            padding: 2.5rem;
+        }
+
+        .service-title {
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .service-description {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
             color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
+            line-height: 1.8;
+            margin-bottom: 2rem;
         }
 
-        .service-card.expanded .service-description {
-            max-height: 200px;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
         }
 
-        .expand-indicator {
+        .service-features li {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 215, 0, 0.2);
-            color: var(--gold);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            left: 0;
+            color: var(--green);
+            font-weight: bold;
             font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
         }
 
-        .service-card.expanded .expand-indicator {
-            transform: rotate(45deg);
-            background: rgba(255, 215, 0, 0.3);
+        .service-btn {
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, #0D9488, var(--green-dark));
         }
 
         /* Studio Gallery Modal */
@@ -320,106 +651,191 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            background: var(--dark-gray);
-            border-radius: 20px;
-            padding: 2rem;
+            max-width: 95%;
+            max-height: 95%;
+            background: linear-gradient(145deg, var(--dark-gray), var(--medium-gray));
+            border-radius: 25px;
+            padding: 3rem;
             border: 1px solid rgba(255, 215, 0, 0.2);
             position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2rem;
+            top: 25px;
+            right: 30px;
+            font-size: 2.5rem;
             color: var(--gold);
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1);
         }
 
         .modal-close:hover {
             transform: rotate(90deg);
+            background: rgba(255, 215, 0, 0.2);
             color: #fff;
+        }
+
+        .modal-title {
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .gallery-item {
             aspect-ratio: 4/3;
             background: var(--medium-gray);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
         }
 
         .gallery-item:hover {
             transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        /* Responsive */
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-trail {
+                display: none;
+            }
+
             .navbar {
                 padding: 1rem 1.5rem;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
-            .hero p {
-                font-size: 1rem;
+            .hero .subtitle {
+                font-size: 1.1rem;
             }
 
-            .services {
-                padding: 60px 1rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
                 gap: 1.5rem;
             }
 
-            .service-card {
+            .primary-btn, .secondary-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .features-grid, .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+
+            .feature-card, .service-card {
                 margin: 0 0.5rem;
             }
 
             .modal-content {
                 margin: 1rem;
-                padding: 1.5rem;
+                padding: 2rem;
             }
 
             .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
             }
         }
 
         @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
             .services-grid {
                 grid-template-columns: 1fr;
             }
 
             .service-card {
                 margin: 0;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
             }
 
             .gallery-grid {
@@ -429,13 +845,23 @@
     </style>
 </head>
 <body>
-    <!-- Background System -->
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Advanced Background System -->
     <div class="bg-container">
         <div class="bg-mesh"></div>
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="bg-particles" id="bgParticles"></div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar">
+    <!-- Enhanced Navbar -->
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">CHARLESTON</a>
             <a href="index.html" class="back-btn">← Torna alla Home</a>
@@ -445,86 +871,237 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Il Nostro Studio</h1>
-            <p>Uno spazio elegante e professionale dedicato alla danza e al movimento artistico</p>
-            <button class="studio-btn" onclick="openStudioGallery()">
-                📸 Guarda lo Studio
-            </button>
+            <h1>La Nostra Scuola</h1>
+            <p class="subtitle">Uno spazio elegante e professionale dove la musica prende vita</p>
+            <div class="hero-actions">
+                <button class="primary-btn" onclick="openStudioGallery()">
+                    📸 Esplora la scuola
+                </button>
+                <button class="secondary-btn" onclick="scrollToServices()">
+                    🎵 Scopri i Servizi
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2 class="section-title">Perché Scegliere Charleston</h2>
+            <p class="section-subtitle">
+                Il nostro studio offre un ambiente stimolante e professionale, 
+                dotato delle migliori attrezzature per garantire un'esperienza musicale unica
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎸</div>
+                <h3 class="feature-title">Strumenti Professionali</h3>
+                <p class="feature-description">
+                    Chitarre acustiche ed elettriche di alta qualità, amplificatori premium 
+                    e accessori professionali per un suono impeccabile
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎤</div>
+                <h3 class="feature-title">Registrazione Audio</h3>
+                <p class="feature-description">
+                    Studio di registrazione con microfoni condensatori e sistema di mixaggio 
+                    professionale per immortalare le tue performance
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎹</div>
+                <h3 class="feature-title">Tastiere & Piano</h3>
+                <p class="feature-description">
+                    Pianoforte acustico e tastiere digitali con weighted keys per 
+                    un'esperienza di suono autentica e coinvolgente
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🥁</div>
+                <h3 class="feature-title">Batteria Completa</h3>
+                <p class="feature-description">
+                    Set di batteria acustica professionale con cymbals premium 
+                    e sistema di monitoraggio per sessioni dinamiche
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <h3 class="feature-title">Audio Hi-Fi</h3>
+                <p class="feature-description">
+                    Sistema audio stereo ad alta fedeltà con trattamento acustico 
+                    professionale per un suono cristallino
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3 class="feature-title">Ambiente Accogliente</h3>
+                <p class="feature-description">
+                    Spazi confortevoli e ispiranti, progettati per stimolare 
+                    la creatività e garantire il massimo comfort durante le sessioni
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services">
-        <h2>I Nostri Servizi</h2>
-        
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <h2 class="section-title">Le nostre Lezioni</h2>
+            <p class="section-subtitle">
+                Offriamo una gamma completa di servizi musicali per tutti i livelli e le età
+            </p>
+        </div>
+
         <div class="services-grid">
-            <div class="service-card" onclick="toggleCard(this)">
+            <div class="service-card">
                 <div class="service-image">
-                    <img src="src/img/chitarra.jpg" alt="Lezioni Private">
-                    <div class="expand-indicator">+</div>
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Lezioni di Chitarra">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€45</div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Lezioni di Chitarra</h3>
-                    <div class="service-price">€45 <span>a partire da</span></div>
-                    <div class="service-description">
-                        Lezioni individuali personalizzate per tutti i livelli. Il nostro approccio one-on-one ti permette di progredire rapidamente, concentrandoti sui tuoi obiettivi specifici. Ogni sessione è cucita su misura per le tue esigenze, dal principiante assoluto al ballerino esperto che vuole perfezionare la propria tecnica.
-                    </div>
+                    <p class="service-description">
+                        Lezioni individuali personalizzate per tutti i livelli, 
+                        dal principiante assoluto al musicista esperto che vuole perfezionare la propria tecnica.
+                    </p>
+                    <ul class="service-features">
+                        <li>Lezioni personalizzate one-on-one</li>
+                        <li>Tutti i generi musicali</li>
+                        <li>Teoria musicale inclusa</li>
+                        <li>Materiale didattico fornito</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('chitarra')">
+                        Prenota Lezione
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleCard(this)">
+            <div class="service-card">
                 <div class="service-image">
-                    <img src="src/img/basso.jpg" alt="Coppie">
-                    <div class="expand-indicator">+</div>
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Basso">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€50</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Basso</h3>
-                    <div class="service-price">€70 <span>a partire da</span></div>
-                    <div class="service-description">
-                        Perfetto per coppie che vogliono condividere la passione per la danza. Imparerete a muovervi in sintonia, a comunicare attraverso il movimento e a creare una connessione speciale. Ideale per matrimoni, anniversari o semplicemente per divertirsi insieme.
-                    </div>
+                    <h3 class="service-title">Lezioni di Basso</h3>
+                    <p class="service-description">
+                        Impara le fondamenta del basso elettrico e diventa il groove 
+                        della band con tecniche moderne e classiche.
+                    </p>
+                    <ul class="service-features">
+                        <li>Tecnica slap e fingerstyle</li>
+                        <li>Groove e timing perfetto</li>
+                        <li>Basso a 4 e 5 corde</li>
+                        <li>Jam session incluse</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('basso')">
+                        Prenota Lezione
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleCard(this)">
+            <div class="service-card">
                 <div class="service-image">
-                    <img src="src/img/batteria.jpg" alt="Gruppo">
-                    <div class="expand-indicator">+</div>
+                    <img src="https://images.unsplash.com/photo-1571327073757-af4cf880c5ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Batteria">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€55</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Batteria</h3>
-                    <div class="service-price">€25 <span>a partire da</span></div>
-                    <div class="service-description">
-                        L'energia del gruppo rende l'apprendimento ancora più divertente! Corsi per piccoli gruppi dove potrai socializzare, imparare nuove coreografie e migliorare in un ambiente stimolante e supportivo. Perfetto per chi ama l'aspetto sociale della danza.
-                    </div>
+                    <h3 class="service-title">Lezioni di Batteria</h3>
+                    <p class="service-description">
+                        Dalla tecnica di base ai fill più complessi, 
+                        sviluppa il tuo senso ritmico su una batteria professionale.
+                    </p>
+                    <ul class="service-features">
+                        <li>Batteria acustica professionale</li>
+                        <li>Tutti gli stili musicali</li>
+                        <li>Rudimenti e coordinazione</li>
+                        <li>Click e metronomo inclusi</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('batteria')">
+                        Prenota Lezione
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleCard(this)">
+            <div class="service-card">
                 <div class="service-image">
-                    <img src="src/img/microfono.jpg" alt="Coreografie">
-                    <div class="expand-indicator">+</div>
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Voce">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€60</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Voce</h3>
-                    <div class="service-price">€150 <span>a partire da</span></div>
-                    <div class="service-description">
-                        Creiamo coreografie uniche per i tuoi eventi speciali. Matrimoni, compleanni, esibizioni o competizioni: ogni coreografia è studiata appositamente per te, considerando il tuo stile, le tue capacità e l'occasione particolare.
-                    </div>
+                    <h3 class="service-title">Lezioni di Canto</h3>
+                    <p class="service-description">
+                        Sviluppa la tua voce con tecniche professionali di respirazione, 
+                        intonazione e interpretazione per tutti i generi musicali.
+                    </p>
+                    <ul class="service-features">
+                        <li>Tecnica vocale professionale</li>
+                        <li>Respirazione e diaframma</li>
+                        <li>Interpretazione e performance</li>
+                        <li>Microfono professionale</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('voce')">
+                        Prenota Lezione
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleCard(this)">
+            <div class="service-card">
                 <div class="service-image">
-                    <img src="src/img/coro.jpg" alt="Workshop">
-                    <div class="expand-indicator">+</div>
+                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coro">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€35</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Coro</h3>
-                    <div class="service-price">€80 <span>a partire da</span></div>
-                    <div class="service-description">
-                        Sessioni intensive di 3-4 ore per approfondire stili specifici o tecniche avanzate. Perfetti per chi vuole fare un salto di qualità in poco tempo o esplorare nuovi generi di danza. Include materiale didattico e video di supporto.
-                    </div>
+                    <h3 class="service-title">Coro & Ensemble</h3>
+                    <p class="service-description">
+                        Partecipa al nostro coro e vivi l'esperienza unica 
+                        di cantare in armonia con altri musicisti appassionati.
+                    </p>
+                    <ul class="service-features">
+                        <li>Coro polifonico</li>
+                        <li>Arrangiamenti originali</li>
+                        <li>Performance dal vivo</li>
+                        <li>Tutti i livelli benvenuti</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('coro')">
+                        Unisciti al Coro
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Registrazione">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€120</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Registrazione Professionale</h3>
+                    <p class="service-description">
+                        Registra i tuoi brani nel nostro studio con attrezzature 
+                        professionali e supporto tecnico specializzato.
+                    </p>
+                    <ul class="service-features">
+                        <li>Studio di registrazione professionale</li>
+                        <li>Mixaggio e mastering inclusi</li>
+                        <li>Supporto tecnico specializzato</li>
+                        <li>Consegna file digitali</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('registrazione')">
+                        Prenota Sessione
+                    </button>
                 </div>
             </div>
         </div>
@@ -534,42 +1111,83 @@
     <div class="modal" id="studioModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeStudioGallery()">&times;</span>
-            <h2 style="color: var(--gold); margin-bottom: 1rem;">Il Nostro Studio</h2>
+            <h2 class="modal-title">La NOstra Scuola</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 1">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 1">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 2">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 2">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 3">
+                    <img src="https://images.unsplash.com/photo-1571327073757-af4cf880c5ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 3">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 4">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 4">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 5">
+                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 5">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1594736797933-d0f06ba52984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Studio 6">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 6">
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Toggle service card expansion
-        function toggleCard(card) {
-            // Close all other cards
-            document.querySelectorAll('.service-card').forEach(c => {
-                if (c !== card) {
-                    c.classList.remove('expanded');
-                }
-            });
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorTrail = document.getElementById('cursorTrail');
+
+        let mouseX = 0, mouseY = 0;
+        let trailX = 0, trailY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursor.style.left = mouseX - 10 + 'px';
+            cursor.style.top = mouseY - 10 + 'px';
+
+            trailX += (mouseX - trailX) * 0.1;
+            trailY += (mouseY - trailY) * 0.1;
+
+            cursorTrail.style.left = trailX - 4 + 'px';
+            cursorTrail.style.top = trailY - 4 + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Enhanced Navbar Scroll
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
             
-            // Toggle current card
-            card.classList.toggle('expanded');
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll functions
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({
+                behavior: 'smooth'
+            });
         }
 
         // Studio gallery modal functions
@@ -597,24 +1215,120 @@
             }
         });
 
-        // Smooth scroll for better UX
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Booking functions
+        function bookService(service) {
+            const messages = {
+                chitarra: 'Ciao! Vorrei prenotare una lezione di chitarra.',
+                basso: 'Ciao! Vorrei prenotare una lezione di basso.',
+                batteria: 'Ciao! Vorrei prenotare una lezione di batteria.',
+                voce: 'Ciao! Vorrei prenotare una lezione di canto.',
+                coro: 'Ciao! Vorrei unirmi al coro.',
+                registrazione: 'Ciao! Vorrei prenotare una sessione di registrazione.'
+            };
+            
+            const message = encodeURIComponent(messages[service] || 'Ciao! Vorrei informazioni sui vostri servizi.');
+            const whatsappUrl = `https://api.whatsapp.com/send/?phone=393519904688&text=${message}&type=phone_number&app_absent=0`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Enhanced Button Interactions
+        document.querySelectorAll('.primary-btn, .secondary-btn, .service-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                if (cursor) {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.borderColor = '#FFD700';
+                }
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                if (cursor) {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.borderColor = '#FFD700';
+                }
+            });
+
+            btn.addEventListener('click', (e) => {
+                // Enhanced Ripple Effect
+                const ripple = document.createElement('div');
+                const rect = btn.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height) * 1.5;
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: radial-gradient(circle, rgba(255, 215, 0, 0.4), transparent);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    pointer-events: none;
+                    z-index: 0;
+                `;
+
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 800);
             });
         });
 
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(0, 0, 0, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+        // Dynamic Particle Generation
+        function createParticles() {
+            const particlesContainer = document.getElementById('bgParticles');
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particle.style.animationDelay = '0s';
+                
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 10000);
+            }, 800);
+        }
+
+        createParticles();
+
+        // CSS Animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
             }
+        `;
+        document.head.appendChild(style);
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.feature-card, .service-card');
+            animateElements.forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
 </body>
