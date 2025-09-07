@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFans - Charleston</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #FFD700;
+            --gold-dark: #B8860B;
+            --gold-light: #FFEF94;
+            --black: #000000;
+            --dark-gray: #111111;
+            --medium-gray: #222222;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background: var(--black);
+            color: #ffffff;
+            overflow-x: hidden;
+            height: 100vh;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+        }
+
+        /* Advanced Background System */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
+
+        .bg-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, rgba(255, 215, 0, 0.03) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(255, 215, 0, 0.03) 100%);
+            background-size: 100px 100px;
+            animation: meshMove 25s linear infinite;
+            opacity: 0.4;
+        }
+
+        .bg-orbs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold), transparent);
+            filter: blur(40px);
+            animation: orbFloat 15s ease-in-out infinite;
+        }
+
+        .orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+            opacity: 0.1;
+        }
+
+        .orb:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -100px;
+            animation-delay: -5s;
+            opacity: 0.08;
+        }
+
+        .orb:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: -200px;
+            left: 30%;
+            animation-delay: -10s;
+            opacity: 0.06;
+        }
+
+        .bg-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes meshMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100px, -100px); }
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 0.1;
+            }
+            25% { 
+                transform: translate(30px, -20px) scale(1.1);
+                opacity: 0.15;
+            }
+            50% { 
+                transform: translate(-20px, 30px) scale(0.9);
+                opacity: 0.08;
+            }
+            75% { 
+                transform: translate(40px, 10px) scale(1.05);
+                opacity: 0.12;
+            }
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(25px) saturate(180%);
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 200;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .back-btn {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--gold);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .back-btn:hover::before {
+            left: 100%;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3); }
+            100% { text-shadow: 0 4px 30px rgba(255, 215, 0, 0.6); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            font-style: italic;
+        }
+
+        .emoji-container {
+            font-size: 6rem;
+            margin: 2rem 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .primary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .primary-btn:hover::before {
+            left: 100%;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .secondary-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
+        }
+
+        .fun-facts {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(17, 17, 17, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .fun-facts h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .fun-facts p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-trail {
+                display: none;
+            }
+
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .main-title {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .primary-btn, .secondary-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .emoji-container {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .main-content {
+                padding: 0 1rem;
+            }
+
+            .fun-facts {
+                margin-top: 3rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Advanced Background System -->
+    <div class="bg-container">
+        <div class="bg-mesh"></div>
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="bg-particles" id="bgParticles"></div>
+    </div>
+
+    <!-- Enhanced Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CHARLESTON</a>
+            <a href="index.html" class="back-btn">← Torna alla Home</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <h1 class="main-title">Oops! 😄</h1>
+            
+            <p class="subtitle">Qui si balla, non si fa altro! 💃🕺</p>
+            
+            <div class="emoji-container">🎭</div>
+            
+            <p class="message">
+                Ci dispiace deluderti, ma l'unico "OnlyFans" che abbiamo qui <br>
+                sono i ventilatori del nostro studio di danza! 😉<br><br>
+                Vieni a ballare con noi invece! È molto più divertente! ✨
+            </p>
+
+            <div class="action-buttons">
+                <a href="index.html" class="primary-btn">
+                    🏠 Torna alla Home
+                </a>
+                <a href="serate.html" class="secondary-btn">
+                    🌟 Scopri le Serate
+                </a>
+            </div>
+
+            <div class="fun-facts">
+                <h3>Lo sapevi che... 🤔</h3>
+                <p>• Il Charleston è nato negli anni '20 ed è ancora uno dei balli più energici!</p>
+                <p>• Ballare per un'ora brucia più calorie di una sessione di palestra! 💪</p>
+                <p>• La danza migliora l'umore e riduce lo stress meglio di qualsiasi altra attività!</p>
+                <p>• I nostri corsi sono aperti a tutti i livelli, dal principiante al professionista!</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorTrail = document.getElementById('cursorTrail');
+
+        let mouseX = 0, mouseY = 0;
+        let trailX = 0, trailY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursor.style.left = mouseX - 10 + 'px';
+            cursor.style.top = mouseY - 10 + 'px';
+
+            trailX += (mouseX - trailX) * 0.1;
+            trailY += (mouseY - trailY) * 0.1;
+
+            cursorTrail.style.left = trailX - 4 + 'px';
+            cursorTrail.style.top = trailY - 4 + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Enhanced Button Interactions
+        document.querySelectorAll('.primary-btn, .secondary-btn, .back-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                if (cursor) {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.borderColor = '#FFD700';
+                }
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                if (cursor) {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.borderColor = '#FFD700';
+                }
+            });
+
+            btn.addEventListener('click', (e) => {
+                // Enhanced Ripple Effect
+                const ripple = document.createElement('div');
+                const rect = btn.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height) * 1.5;
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: radial-gradient(circle, rgba(255, 215, 0, 0.4), transparent);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    pointer-events: none;
+                    z-index: 0;
+                `;
+
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 800);
+            });
+        });
+
+        // Dynamic Particle Generation
+        function createParticles() {
+            const particlesContainer = document.getElementById('bgParticles');
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particle.style.animationDelay = '0s';
+                
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 10000);
+            }, 800);
+        }
+
+        createParticles();
+
+        // CSS Animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Fun easter egg - shake animation on click
+        document.querySelector('.emoji-container').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'bounce 0.5s ease-in-out 3';
+            }, 10);
+        });
+
+        // Add some fun interactions
+        let clickCount = 0;
+        document.querySelector('.main-title').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount >= 5) {
+                this.textContent = "Davvero insistente! 😂";
+                setTimeout(() => {
+                    this.textContent = "Oops! 😄";
+                    clickCount = 0;
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
