@@ -497,6 +497,55 @@
             background: rgba(17, 17, 17, 0.3);
         }
 
+        .promo-banner {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.15),
+                rgba(255, 215, 0, 0.08)
+            );
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: bannerShine 3s infinite;
+        }
+
+        @keyframes bannerShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .promo-text {
+            font-size: 1.4rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .promo-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
         .services-grid {
             max-width: 1400px;
             margin: 0 auto;
@@ -566,12 +615,29 @@
             right: 20px;
             background: rgba(255, 215, 0, 0.9);
             color: var(--black);
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 1.5rem;
             border-radius: 25px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            display: block;
+        }
+
+        .price-promo {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
         }
 
         .service-content {
@@ -678,6 +744,30 @@
             line-height: 1.6;
             margin-bottom: 0.8rem;
             font-size: 0.85rem;
+        }
+
+        .teacher-profile {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .teacher-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            flex-shrink: 0;
+        }
+
+        .teacher-bio {
+            flex: 1;
+        }
+
+        .teacher-bio p {
+            margin-bottom: 0.5rem;
         }
 
         .teacher-details ul {
@@ -1060,13 +1150,21 @@
             </p>
         </div>
 
+        <div class="promo-banner">
+            <div class="promo-text">🎵 Nessun costo di iscrizione</div>
+            <div class="promo-subtitle">In omaggio la tessera del circolo ARCI</div>
+        </div>
+
         <div class="services-grid">
             <!-- Armonia Musicale -->
             <div class="service-card">
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Armonia Musicale">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Armonia Musicale</h3>
@@ -1087,7 +1185,12 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('david-forti-armonia')">Info</button>
                         </div>
                         <div class="teacher-details" id="david-forti-armonia">
-                            <p><strong>Pianista, tastierista e compositore</strong> con una solida formazione classica e jazz presso il Conservatorio Santa Cecilia e Centro Mississippi di Roma.</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/david.jpg" alt="David Forti" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Pianista, tastierista e compositore</strong> con una solida formazione classica e jazz presso il Conservatorio Santa Cecilia e Centro Mississippi di Roma.</p>
+                                </div>
+                            </div>
                             <h4>Qualifiche:</h4>
                             <ul>
                                 <li>Qualificato IMAIE come musicista interprete/esecutore</li>
@@ -1114,7 +1217,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pianoforte e Tastiera">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Pianoforte e Tastiera</h3>
@@ -1135,7 +1241,12 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('david-forti-piano')">Info</button>
                         </div>
                         <div class="teacher-details" id="david-forti-piano">
-                            <p><strong>Pianista e tastierista</strong> con formazione classica e jazz presso il Conservatorio Santa Cecilia e Centro di Formazione Musicale Mississippi di Roma.</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/david.jpg" alt="David Forti" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Pianista e tastierista</strong> con formazione classica e jazz presso il Conservatorio Santa Cecilia e Centro di Formazione Musicale Mississippi di Roma.</p>
+                                </div>
+                            </div>
                             <h4>Qualifiche:</h4>
                             <ul>
                                 <li>Diploma superiore</li>
@@ -1161,7 +1272,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chitarra Elettrica e Acustica">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Chitarra Elettrica e Acustica</h3>
@@ -1182,7 +1296,12 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('adriano-russo')">Info</button>
                         </div>
                         <div class="teacher-details" id="adriano-russo">
-                            <p><strong>Chitarrista, arrangiatore e insegnante</strong> con oltre 10 anni di esperienza tra palchi, studi di registrazione e collaborazioni artistiche.</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/adriano.jpg" alt="Adriano Russo" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Chitarrista, arrangiatore e insegnante</strong> con oltre 10 anni di esperienza tra palchi, studi di registrazione e collaborazioni artistiche.</p>
+                                </div>
+                            </div>
                             <h4>Formazione:</h4>
                             <ul>
                                 <li>Ha studiato al Saint Louis College of Music</li>
@@ -1206,7 +1325,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Basso Elettrico">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Basso Elettrico</h3>
@@ -1227,7 +1349,12 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('emanuele-eleuteri')">Info</button>
                         </div>
                         <div class="teacher-details" id="emanuele-eleuteri">
-                            <p><strong>Bassista professionista</strong> specializzato nell'insegnamento del basso elettrico per tutti i livelli.</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/emanuele.jpg" alt="Emanuele Eleuteri" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Bassista professionista</strong> specializzato nell'insegnamento del basso elettrico per tutti i livelli.</p>
+                                </div>
+                            </div>
                             <h4>Specializzazioni tecniche:</h4>
                             <ul>
                                 <li>Tecniche slap e fingerstyle</li>
@@ -1251,7 +1378,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1571327073757-af4cf880c5ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Batteria">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Batteria</h3>
@@ -1272,7 +1402,12 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('gabriele-morcavallo')">Info</button>
                         </div>
                         <div class="teacher-details" id="gabriele-morcavallo">
-                            <p><strong>Batterista professionista</strong> specializzato nell'insegnamento della batteria per tutti i livelli.</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/gabriele.jpg" alt="Gabriele Morcavallo" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Batterista professionista</strong> specializzato nell'insegnamento della batteria per tutti i livelli.</p>
+                                </div>
+                            </div>
                             <h4>Specializzazioni tecniche:</h4>
                             <ul>
                                 <li>Rudimenti e coordinazione arti</li>
@@ -1296,7 +1431,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Canto">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Canto</h3>
@@ -1317,7 +1455,12 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('martina-lucignano')">Info</button>
                         </div>
                         <div class="teacher-details" id="martina-lucignano">
-                            <p><strong>Insegnante di canto</strong> specializzata nella tecnica vocale per tutti i livelli.</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/martina.jpg" alt="Martina Lucignano" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Insegnante di canto</strong> specializzata nella tecnica vocale per tutti i livelli.</p>
+                                </div>
+                            </div>
                             <h4>Specializzazioni tecniche:</h4>
                             <ul>
                                 <li>Respirazione diaframmatica e postura</li>
@@ -1341,7 +1484,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coro">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€35</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Coro</h3>
@@ -1367,7 +1513,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Propedeutica Musicale">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Propedeutica Musicale</h3>
@@ -1388,7 +1537,12 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('irene-pastrello')">Info</button>
                         </div>
                         <div class="teacher-details" id="irene-pastrello">
-                            <p><strong>Operatrice musicale</strong> specializzata nella fascia 0–10 anni, con formazione specifica in didattica musicale per l'infanzia.</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/irene.jpg" alt="Irene Pastrello" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Operatrice musicale</strong> specializzata nella fascia 0–10 anni, con formazione specifica in didattica musicale per l'infanzia.</p>
+                                </div>
+                            </div>
                             <h4>Formazione accademica:</h4>
                             <ul>
                                 <li>Didattica della Musica (Conservatorio Pollini di Padova)</li>
@@ -1416,7 +1570,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Music Marketing">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€60</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Music Marketing & Business</h3>
@@ -1442,7 +1599,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Home Recording">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€55</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Home Recording</h3>
@@ -1463,8 +1623,13 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('termosimone-recording')">Info</button>
                         </div>
                         <div class="teacher-details" id="termosimone-recording">
-                            <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
-                            <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/termosimone.jpg" alt="Termosimone (Simone Pistolesi)" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
+                                    <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                                </div>
+                            </div>
                             <h4>Specializzazioni tecniche:</h4>
                             <ul>
                                 <li>Setup e configurazione di home studio</li>
@@ -1488,7 +1653,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mix & Master">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€65</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Mix & Master</h3>
@@ -1509,8 +1677,13 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('termosimone-mixmaster')">Info</button>
                         </div>
                         <div class="teacher-details" id="termosimone-mixmaster">
-                            <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
-                            <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/termosimone.jpg" alt="Termosimone (Simone Pistolesi)" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
+                                    <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                                </div>
+                            </div>
                             <h4>Specializzazioni avanzate:</h4>
                             <ul>
                                 <li>Mixaggio professionale e bilanciamento</li>
@@ -1534,7 +1707,10 @@
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Recording + Mix Master">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€90</div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
+                    </div>
                 </div>
                 <div class="service-content">
                     <h3 class="service-title">Recording + Mix & Master</h3>
@@ -1555,8 +1731,13 @@
                             <button class="info-btn" onclick="toggleTeacherInfo('termosimone-combo')">Info</button>
                         </div>
                         <div class="teacher-details" id="termosimone-combo">
-                            <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
-                            <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                            <div class="teacher-profile">
+                                <img src="src/img/termosimone.jpg" alt="Termosimone (Simone Pistolesi)" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
+                                    <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                                </div>
+                            </div>
                             <h4>Percorso completo di autoproduzione:</h4>
                             <ul>
                                 <li>Home Recording: setup, registrazione, workflow</li>
