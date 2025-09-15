@@ -612,6 +612,95 @@
             font-size: 1.2rem;
         }
 
+        /* Teacher Info Section */
+        .teacher-info {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-left: 3px solid var(--gold);
+            border-radius: 8px;
+        }
+
+        .teacher-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .teacher-name {
+            color: rgba(255, 215, 0, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .info-btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+        }
+
+        .info-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
+
+        .teacher-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .teacher-details.expanded {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .teacher-details h4 {
+            color: var(--gold);
+            margin: 1rem 0 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .teacher-details p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .teacher-details ul {
+            list-style: none;
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .teacher-details li {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .teacher-details li::before {
+            content: '🎵';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
         .service-btn {
             background: linear-gradient(135deg, var(--green), var(--green-dark));
             color: white;
@@ -819,6 +908,16 @@
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 1rem;
             }
+
+            .teacher-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .info-btn {
+                align-self: flex-end;
+            }
         }
 
         @media (max-width: 480px) {
@@ -954,109 +1053,290 @@
     <!-- Services Section -->
     <section class="services-section" id="services">
         <div class="section-header">
-            <h2 class="section-title">Le nostre Lezioni</h2>
+            <h2 class="section-title">I nostri Corsi</h2>
             <p class="section-subtitle">
-                Offriamo una gamma completa di servizi musicali per tutti i livelli e le età
+                Offriamo una gamma completa di corsi musicali per tutti i livelli e le età, 
+                con docenti qualificati e primo incontro sempre gratuito
             </p>
         </div>
 
         <div class="services-grid">
+            <!-- Armonia Musicale -->
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Lezioni di Chitarra">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Armonia Musicale">
                     <div class="service-overlay"></div>
                     <div class="service-price">€45</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Chitarra</h3>
+                    <h3 class="service-title">Armonia Musicale</h3>
                     <p class="service-description">
-                        Lezioni individuali personalizzate per tutti i livelli, 
-                        dal principiante assoluto al musicista esperto che vuole perfezionare la propria tecnica.
+                        Scopri i segreti dell'armonia musicale con David Forti. 
+                        Dal livello base alle tecniche avanzate di jazz e composizione.
                     </p>
                     <ul class="service-features">
-                        <li>Lezioni personalizzate one-on-one</li>
-                        <li>Tutti i generi musicali</li>
-                        <li>Teoria musicale inclusa</li>
-                        <li>Materiale didattico fornito</li>
+                        <li>Scale maggiori e minori, accordi</li>
+                        <li>Progressioni armoniche complesse</li>
+                        <li>Jazz e armonia moderna</li>
+                        <li>Composizione e arrangiamento</li>
                     </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>David Forti</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('david-forti-armonia')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="david-forti-armonia">
+                            <p><strong>Pianista, tastierista e compositore</strong> con una solida formazione classica e jazz presso il Conservatorio Santa Cecilia e Centro Mississippi di Roma.</p>
+                            <h4>Qualifiche:</h4>
+                            <ul>
+                                <li>Qualificato IMAIE come musicista interprete/esecutore</li>
+                                <li>Compositore iscritto SIAE</li>
+                                <li>Diploma in informatica musicale e strumentazione elettronica</li>
+                            </ul>
+                            <h4>Esperienza TV:</h4>
+                            <p>Ha lavorato come pianista, tastierista, arrangiatore e consulente musicale per programmi come Buona Domenica, Amici, Sarabanda, La Corrida, Ciao Darwin.</p>
+                            <h4>Cinema:</h4>
+                            <p>Pianista e consulente musicale per la colonna sonora del film "Here After" (Fenix Entertainment, U.S.A. 2024).</p>
+                            <h4>Collaborazioni artistiche:</h4>
+                            <p>Ha lavorato con Lucio Dalla, Michael Bublé, Pooh, Franco Califano, Marcella Bella, Rita Pavone, Orietta Berti, Massimo Lopez, Valerio Lundini e molti altri.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('armonia')">
+                        Prenota Lezione
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pianoforte e Tastiera -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pianoforte e Tastiera">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€45</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Pianoforte e Tastiera</h3>
+                    <p class="service-description">
+                        Lezioni di pianoforte e tastiere con David Forti. 
+                        Dalla postura base all'improvvisazione avanzata e accompagnamento band.
+                    </p>
+                    <ul class="service-features">
+                        <li>Tecnica classica e moderna</li>
+                        <li>Accompagnamenti pop/rock/jazz</li>
+                        <li>Improvvisazione e arrangiamento</li>
+                        <li>Sviluppo stile personale</li>
+                    </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>David Forti</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('david-forti-piano')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="david-forti-piano">
+                            <p><strong>Pianista e tastierista</strong> con formazione classica e jazz presso il Conservatorio Santa Cecilia e Centro di Formazione Musicale Mississippi di Roma.</p>
+                            <h4>Qualifiche:</h4>
+                            <ul>
+                                <li>Diploma superiore</li>
+                                <li>Qualifica IMAIE come musicista interprete/esecutore</li>
+                                <li>Qualifica SIAE come compositore</li>
+                                <li>Diploma in informatica musicale e strumentazione elettronica</li>
+                            </ul>
+                            <h4>Esperienza TV:</h4>
+                            <p>Pianista, tastierista e vocalist in programmi come Buona Domenica, Ciao Darwin, Uomini e Donne. Arrangiatore per Sarabanda, Amici, La Corrida, Momenti di gloria.</p>
+                            <h4>Esperienza didattica:</h4>
+                            <p>Ex insegnante presso Percento Musica e pianista per eventi in prestigiose strutture alberghiere (catene Boscolo e Hilton).</p>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('pianoforte')">
+                        Prenota Lezione
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chitarra -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chitarra Elettrica e Acustica">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€45</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Chitarra Elettrica e Acustica</h3>
+                    <p class="service-description">
+                        Impara chitarra elettrica e acustica con Adriano Russo. 
+                        Dalla tecnica base all'improvvisazione avanzata, tutti i generi musicali.
+                    </p>
+                    <ul class="service-features">
+                        <li>Accordi, scale e arpeggi</li>
+                        <li>Tecniche ritmiche e solistiche</li>
+                        <li>Blues, jazz, rock, funk, soul</li>
+                        <li>Improvvisazione e arrangiamento</li>
+                    </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>Adriano Russo</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('adriano-russo')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="adriano-russo">
+                            <p><strong>Chitarrista, arrangiatore e insegnante</strong> con oltre 10 anni di esperienza tra palchi, studi di registrazione e collaborazioni artistiche.</p>
+                            <h4>Formazione:</h4>
+                            <ul>
+                                <li>Ha studiato al Saint Louis College of Music</li>
+                                <li>Formazione presso la Lizard</li>
+                            </ul>
+                            <h4>Esperienza professionale:</h4>
+                            <p>Ha suonato in festival, spettacoli teatrali, produzioni televisive e cinematografiche, portando con sé una grande versatilità musicale.</p>
+                            <h4>Filosofia didattica:</h4>
+                            <p>Con Adriano non impari solo a suonare la chitarra: impari a vivere la musica, con passione ed espressività, sviluppando il tuo stile personale.</p>
+                        </div>
+                    </div>
+                    
                     <button class="service-btn" onclick="bookService('chitarra')">
                         Prenota Lezione
                     </button>
                 </div>
             </div>
 
+            <!-- Basso -->
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Basso">
+                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Basso Elettrico">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€50</div>
+                    <div class="service-price">€45</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Basso</h3>
+                    <h3 class="service-title">Basso Elettrico</h3>
                     <p class="service-description">
-                        Impara le fondamenta del basso elettrico e diventa il groove 
-                        della band con tecniche moderne e classiche.
+                        Diventa il groove della band con Emanuele Eleuteri. 
+                        Dalle basi dello strumento alle tecniche avanzate di slap e walking bass.
                     </p>
                     <ul class="service-features">
-                        <li>Tecnica slap e fingerstyle</li>
-                        <li>Groove e timing perfetto</li>
-                        <li>Basso a 4 e 5 corde</li>
-                        <li>Jam session incluse</li>
+                        <li>Impostazione tecnica e groove</li>
+                        <li>Slap, ghost notes, walking bass</li>
+                        <li>Rock, funk, pop e jazz</li>
+                        <li>Improvvisazione e linguaggio personale</li>
                     </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>Emanuele Eleuteri</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('emanuele-eleuteri')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="emanuele-eleuteri">
+                            <p><strong>Bassista professionista</strong> specializzato nell'insegnamento del basso elettrico per tutti i livelli.</p>
+                            <h4>Specializzazioni tecniche:</h4>
+                            <ul>
+                                <li>Tecniche slap e fingerstyle</li>
+                                <li>Ghost notes e dinamiche avanzate</li>
+                                <li>Walking bass per il jazz</li>
+                                <li>Groove e timing per rock, funk e pop</li>
+                            </ul>
+                            <h4>Approccio didattico:</h4>
+                            <p>Focus sull'importanza del ruolo del basso come ponte tra ritmo e armonia, sviluppando la capacità di tenere insieme la band.</p>
+                        </div>
+                    </div>
+                    
                     <button class="service-btn" onclick="bookService('basso')">
                         Prenota Lezione
                     </button>
                 </div>
             </div>
 
+            <!-- Batteria -->
             <div class="service-card">
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1571327073757-af4cf880c5ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Batteria">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€55</div>
+                    <div class="service-price">€45</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Batteria</h3>
+                    <h3 class="service-title">Batteria</h3>
                     <p class="service-description">
-                        Dalla tecnica di base ai fill più complessi, 
-                        sviluppa il tuo senso ritmico su una batteria professionale.
+                        Sviluppa groove solidi e timing impeccabile con Gabriele Morcavallo. 
+                        Dai rudimenti base alle poliritmie e tecniche di session.
                     </p>
                     <ul class="service-features">
-                        <li>Batteria acustica professionale</li>
-                        <li>Tutti gli stili musicali</li>
                         <li>Rudimenti e coordinazione</li>
-                        <li>Click e metronomo inclusi</li>
+                        <li>Groove funk, jazz, latin</li>
+                        <li>Poliritmie e tempi dispari</li>
+                        <li>Preparazione studio e live</li>
                     </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>Gabriele Morcavallo</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('gabriele-morcavallo')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="gabriele-morcavallo">
+                            <p><strong>Batterista professionista</strong> specializzato nell'insegnamento della batteria per tutti i livelli.</p>
+                            <h4>Specializzazioni tecniche:</h4>
+                            <ul>
+                                <li>Rudimenti e coordinazione arti</li>
+                                <li>Groove funk, jazz, latin e shuffle</li>
+                                <li>Poliritmie e tempi dispari</li>
+                                <li>Tecniche di dynamic e controllo del suono</li>
+                            </ul>
+                            <h4>Preparazione professionale:</h4>
+                            <p>Prepara i musicisti per session in studio di registrazione e performance dal vivo, sviluppando sia la tecnica che l'indipendenza creativa.</p>
+                        </div>
+                    </div>
+                    
                     <button class="service-btn" onclick="bookService('batteria')">
                         Prenota Lezione
                     </button>
                 </div>
             </div>
 
+            <!-- Canto -->
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Voce">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Canto">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€60</div>
+                    <div class="service-price">€45</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Canto</h3>
+                    <h3 class="service-title">Canto</h3>
                     <p class="service-description">
-                        Sviluppa la tua voce con tecniche professionali di respirazione, 
-                        intonazione e interpretazione per tutti i generi musicali.
+                        Sviluppa la tua voce con Martina Lucignano. 
+                        Dalla respirazione base alle tecniche avanzate e performance scenica.
                     </p>
                     <ul class="service-features">
-                        <li>Tecnica vocale professionale</li>
-                        <li>Respirazione e diaframma</li>
-                        <li>Interpretazione e performance</li>
-                        <li>Microfono professionale</li>
+                        <li>Respirazione e postura</li>
+                        <li>Controllo vocale e estensione</li>
+                        <li>Belting, falsetto, distorsioni</li>
+                        <li>Performance e interpretazione</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('voce')">
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👩‍🏫 Docente: <strong>Martina Lucignano</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('martina-lucignano')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="martina-lucignano">
+                            <p><strong>Insegnante di canto</strong> specializzata nella tecnica vocale per tutti i livelli.</p>
+                            <h4>Specializzazioni tecniche:</h4>
+                            <ul>
+                                <li>Respirazione diaframmatica e postura</li>
+                                <li>Controllo vocale e estensione</li>
+                                <li>Tecniche avanzate: belting, falsetto, distorsioni</li>
+                                <li>Dizione e interpretazione</li>
+                            </ul>
+                            <h4>Performance e palcoscenico:</h4>
+                            <p>Sviluppa le competenze di performance scenica e interpretazione personale, lavorando sia sulla tecnica pura che sull'espressività artistica.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('canto')">
                         Prenota Lezione
                     </button>
                 </div>
             </div>
 
+            <!-- Coro -->
             <div class="service-card">
                 <div class="service-image">
                     <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coro">
@@ -1064,10 +1344,10 @@
                     <div class="service-price">€35</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Coro & Ensemble</h3>
+                    <h3 class="service-title">Coro</h3>
                     <p class="service-description">
-                        Partecipa al nostro coro e vivi l'esperienza unica 
-                        di cantare in armonia con altri musicisti appassionati.
+                        Vivi l'esperienza unica di cantare in armonia. 
+                        Coro polifonico con arrangiamenti originali e performance dal vivo.
                     </p>
                     <ul class="service-features">
                         <li>Coro polifonico</li>
@@ -1075,32 +1355,222 @@
                         <li>Performance dal vivo</li>
                         <li>Tutti i livelli benvenuti</li>
                     </ul>
+                    
                     <button class="service-btn" onclick="bookService('coro')">
                         Unisciti al Coro
                     </button>
                 </div>
             </div>
 
+            <!-- Propedeutica Musicale -->
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Registrazione">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Propedeutica Musicale">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€120</div>
+                    <div class="service-price">€45</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Registrazione Professionale</h3>
+                    <h3 class="service-title">Propedeutica Musicale</h3>
                     <p class="service-description">
-                        Registra i tuoi brani nel nostro studio con attrezzature 
-                        professionali e supporto tecnico specializzato.
+                        Corso per bambini 3-9 anni con Irene Pastrello. 
+                        Attività ludico-musicali per sviluppare sensibilità al suono e ritmo.
                     </p>
                     <ul class="service-features">
-                        <li>Studio di registrazione professionale</li>
-                        <li>Mixaggio e mastering inclusi</li>
-                        <li>Supporto tecnico specializzato</li>
-                        <li>Consegna file digitali</li>
+                        <li>Fascia 3-5 anni: giochi musicali</li>
+                        <li>Fascia 6-9 anni: prime basi teoriche</li>
+                        <li>Strumenti didattici</li>
+                        <li>Preparazione allo studio strumentale</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('registrazione')">
-                        Prenota Sessione
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👩‍🏫 Docente: <strong>Irene Pastrello</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('irene-pastrello')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="irene-pastrello">
+                            <p><strong>Operatrice musicale</strong> specializzata nella fascia 0–10 anni, con formazione specifica in didattica musicale per l'infanzia.</p>
+                            <h4>Formazione accademica:</h4>
+                            <ul>
+                                <li>Didattica della Musica (Conservatorio Pollini di Padova)</li>
+                                <li>Corsi di specializzazione Musica in Culla (I e II livello)</li>
+                                <li>Orff-Schulwerk (livello base e intermedio)</li>
+                                <li>In formazione come musicoterapista presso SFMT Oltre di Roma</li>
+                            </ul>
+                            <h4>Esperienza professionale:</h4>
+                            <ul>
+                                <li>Fondatrice dell'APS Nuove Rotte</li>
+                                <li>Educatrice musicale nei progetti Bimbinmusica e Kirikù</li>
+                                <li>Ex insegnante presso Scuola di Musica Sinopoli</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('propedeutica')">
+                        Prenota Lezione
+                    </button>
+                </div>
+            </div>
+
+            <!-- Music Marketing & Business -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Music Marketing">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€60</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Music Marketing & Business</h3>
+                    <p class="service-description">
+                        Consulenze personalizzate per creare e far crescere il tuo progetto artistico. 
+                        Personal branding, social media e strategie di business musicale.
+                    </p>
+                    <ul class="service-features">
+                        <li>Personal branding musicale</li>
+                        <li>Strategie social avanzate</li>
+                        <li>Content creation con smartphone</li>
+                        <li>Business model e monetizzazione</li>
+                    </ul>
+                    
+                    <button class="service-btn" onclick="bookService('marketing')">
+                        Prenota Consulenza
+                    </button>
+                </div>
+            </div>
+
+            <!-- Home Recording -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Home Recording">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€55</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Home Recording</h3>
+                    <p class="service-description">
+                        Impara a registrare da casa con Termosimone. 
+                        Setup, tecniche di registrazione e workflow professionale per il tuo home studio.
+                    </p>
+                    <ul class="service-features">
+                        <li>Setup scheda audio e microfoni</li>
+                        <li>Tecniche di registrazione</li>
+                        <li>Uso della DAW</li>
+                        <li>Workflow da studio casalingo</li>
+                    </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>Termosimone</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('termosimone-recording')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="termosimone-recording">
+                            <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
+                            <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                            <h4>Specializzazioni tecniche:</h4>
+                            <ul>
+                                <li>Setup e configurazione di home studio</li>
+                                <li>Tecniche di registrazione multitraccia</li>
+                                <li>Gestione delle DAW (Digital Audio Workstation)</li>
+                                <li>Workflow professionale per l'autoproduzione</li>
+                            </ul>
+                            <h4>Filosofia didattica:</h4>
+                            <p>Trasforma la tua camera in un piccolo studio professionale, insegnando come ottenere registrazioni di qualità senza spendere fortune in attrezzatura.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('recording')">
+                        Prenota Lezione
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mix & Master -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mix & Master">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€65</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Mix & Master</h3>
+                    <p class="service-description">
+                        Dai un suono professionale alle tue canzoni con Termosimone. 
+                        Mixaggio, mastering e tecniche avanzate per piattaforme digitali.
+                    </p>
+                    <ul class="service-features">
+                        <li>Bilanciamento e equalizzazione</li>
+                        <li>Effetti creativi e spazio stereo</li>
+                        <li>Mastering per streaming</li>
+                        <li>Workflow professionale</li>
+                    </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>Termosimone</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('termosimone-mixmaster')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="termosimone-mixmaster">
+                            <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
+                            <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                            <h4>Specializzazioni avanzate:</h4>
+                            <ul>
+                                <li>Mixaggio professionale e bilanciamento</li>
+                                <li>Mastering per piattaforme digitali e supporti fisici</li>
+                                <li>Gestione delle frequenze e spazio stereo</li>
+                                <li>Workflow da studio professionale</li>
+                            </ul>
+                            <h4>Metodo di lavoro:</h4>
+                            <p>Lezioni pratiche direttamente in studio al Charleston, con possibilità di lavorare sui tuoi brani per uscire dal corso con risultati concreti.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('mixmaster')">
+                        Prenota Lezione
+                    </button>
+                </div>
+            </div>
+
+            <!-- Combo Home Recording + Mix & Master -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Recording + Mix Master">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€90</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Recording + Mix & Master</h3>
+                    <p class="service-description">
+                        Corso completo con Termosimone: dall'home recording al master finale. 
+                        Percorso completo per l'autoproduzione musicale.
+                    </p>
+                    <ul class="service-features">
+                        <li>Home recording completo</li>
+                        <li>Mix professionale</li>
+                        <li>Mastering per digital/fisico</li>
+                        <li>Controllo totale del suono</li>
+                    </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>Termosimone</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('termosimone-combo')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="termosimone-combo">
+                            <p><strong>Producer e sound engineer</strong> con anni di esperienza su produzioni discografiche e performance dal vivo.</p>
+                            <p><strong>Nome completo:</strong> Simone Pistolesi</p>
+                            <h4>Percorso completo di autoproduzione:</h4>
+                            <ul>
+                                <li>Home Recording: setup, registrazione, workflow</li>
+                                <li>Mix professionale: bilanciamento, effetti, spazio stereo</li>
+                                <li>Mastering: finalizzazione per digitale e fisico</li>
+                                <li>Controllo totale del processo produttivo</li>
+                            </ul>
+                            <h4>Vantaggi:</h4>
+                            <p>Impari l'intero workflow produttivo, dalle basi della registrazione fino al master finale, acquisendo completa autonomia nella produzione musicale.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('combo')">
+                        Prenota Percorso
                     </button>
                 </div>
             </div>
@@ -1111,7 +1581,7 @@
     <div class="modal" id="studioModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeStudioGallery()">&times;</span>
-            <h2 class="modal-title">La NOstra Scuola</h2>
+            <h2 class="modal-title">La Nostra Scuola</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 1">
@@ -1215,24 +1685,46 @@
             }
         });
 
+        // Teacher info toggle function
+        function toggleTeacherInfo(teacherId) {
+            const teacherDetails = document.getElementById(teacherId);
+            const infoBtn = document.querySelector(`button[onclick="toggleTeacherInfo('${teacherId}')"]`);
+            
+            if (teacherDetails.classList.contains('expanded')) {
+                teacherDetails.classList.remove('expanded');
+                infoBtn.textContent = 'Info';
+                infoBtn.style.background = 'linear-gradient(135deg, var(--gold), var(--gold-dark))';
+            } else {
+                teacherDetails.classList.add('expanded');
+                infoBtn.textContent = 'Chiudi';
+                infoBtn.style.background = 'linear-gradient(135deg, #B8860B, #8B6914)';
+            }
+        }
+
         // Booking functions
         function bookService(service) {
             const messages = {
-                chitarra: 'Ciao! Vorrei prenotare una lezione di chitarra.',
-                basso: 'Ciao! Vorrei prenotare una lezione di basso.',
-                batteria: 'Ciao! Vorrei prenotare una lezione di batteria.',
-                voce: 'Ciao! Vorrei prenotare una lezione di canto.',
-                coro: 'Ciao! Vorrei unirmi al coro.',
-                registrazione: 'Ciao! Vorrei prenotare una sessione di registrazione.'
+                armonia: 'Ciao! Vorrei prenotare una lezione di Armonia Musicale con David Forti.',
+                pianoforte: 'Ciao! Vorrei prenotare una lezione di Pianoforte/Tastiera con David Forti.',
+                chitarra: 'Ciao! Vorrei prenotare una lezione di Chitarra con Adriano Russo.',
+                basso: 'Ciao! Vorrei prenotare una lezione di Basso con Emanuele Eleuteri.',
+                batteria: 'Ciao! Vorrei prenotare una lezione di Batteria con Gabriele Morcavallo.',
+                canto: 'Ciao! Vorrei prenotare una lezione di Canto con Martina Lucignano.',
+                coro: 'Ciao! Vorrei unirmi al Coro.',
+                propedeutica: 'Ciao! Vorrei prenotare una lezione di Propedeutica Musicale con Irene Pastrello.',
+                marketing: 'Ciao! Vorrei prenotare una consulenza di Music Marketing & Business.',
+                recording: 'Ciao! Vorrei prenotare una lezione di Home Recording con Termosimone.',
+                mixmaster: 'Ciao! Vorrei prenotare una lezione di Mix & Master con Termosimone.',
+                combo: 'Ciao! Vorrei prenotare il corso completo Home Recording + Mix & Master con Termosimone.'
             };
             
-            const message = encodeURIComponent(messages[service] || 'Ciao! Vorrei informazioni sui vostri servizi.');
+            const message = encodeURIComponent(messages[service] || 'Ciao! Vorrei informazioni sui vostri corsi.');
             const whatsappUrl = `https://api.whatsapp.com/send/?phone=393519904688&text=${message}&type=phone_number&app_absent=0`;
             window.open(whatsappUrl, '_blank');
         }
 
         // Enhanced Button Interactions
-        document.querySelectorAll('.primary-btn, .secondary-btn, .service-btn').forEach(btn => {
+        document.querySelectorAll('.primary-btn, .secondary-btn, .service-btn, .info-btn').forEach(btn => {
             btn.addEventListener('mouseenter', () => {
                 if (cursor) {
                     cursor.style.transform = 'scale(1.5)';
