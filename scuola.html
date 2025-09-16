@@ -1566,33 +1566,57 @@
             </div>
 
             <!-- Music Marketing & Business -->
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Music Marketing">
-                    <div class="service-overlay"></div>
-                    <div class="service-price">
-                        <span class="price-original">€29</span>
-                        <span class="price-promo">Gratis prima lezione</span>
+<div class="service-card">
+    <div class="service-image">
+        <img src="src/img/pablo.jpg" alt="Music Marketing">
+        <div class="service-overlay"></div>
+        <div class="service-price">
+            <span class="price-original">€29</span>
+            <span class="price-promo">Gratis prima lezione</span>
+        </div>
+    </div>
+    <div class="service-content">
+        <h3 class="service-title">Music Marketing & Business</h3>
+        <p class="service-description">
+            Consulenze personalizzate per creare e far crescere il tuo progetto artistico con Pablo. 
+            Personal branding, social media e strategie di business musicale.
+        </p>
+        <ul class="service-features">
+            <li>Personal branding musicale</li>
+            <li>Strategie social avanzate</li>
+            <li>Content creation con smartphone</li>
+            <li>Business model e monetizzazione</li>
+        </ul>
+        
+        <div class="teacher-info">
+            <div class="teacher-header">
+                <div class="teacher-name">👨‍🏫 Docente: <strong>Pablo</strong></div>
+                <button class="info-btn" onclick="toggleTeacherInfo('pablo-marketing')">Info</button>
+            </div>
+            <div class="teacher-details" id="pablo-marketing">
+                <div class="teacher-profile">
+                    <img src="src/img/pablo.jpg" alt="Pablo" class="teacher-photo">
+                    <div class="teacher-bio">
+                        <p><strong>Esperto di Music Marketing e Business</strong> specializzato nel supporto agli artisti emergenti e nella creazione di strategie digitali efficaci.</p>
                     </div>
                 </div>
-                <div class="service-content">
-                    <h3 class="service-title">Music Marketing & Business</h3>
-                    <p class="service-description">
-                        Consulenze personalizzate per creare e far crescere il tuo progetto artistico. 
-                        Personal branding, social media e strategie di business musicale.
-                    </p>
-                    <ul class="service-features">
-                        <li>Personal branding musicale</li>
-                        <li>Strategie social avanzate</li>
-                        <li>Content creation con smartphone</li>
-                        <li>Business model e monetizzazione</li>
-                    </ul>
-                    
-                    <button class="service-btn" onclick="bookService('marketing')">
-                        Prenota Consulenza
-                    </button>
-                </div>
+                <h4>Specializzazioni:</h4>
+                <ul>
+                    <li>Personal branding per artisti musicali</li>
+                    <li>Strategie social media avanzate</li>
+                    <li>Content creation e storytelling</li>
+                    <li>Analisi e ottimizzazione delle performance digitali</li>
+                </ul>
+                <h4>Metodo di lavoro:</h4>
+                <p>Approccio pratico e personalizzato, con focus sulla creazione di un'identità artistica autentica e strategie di marketing sostenibili nel lungo termine.</p>
             </div>
+        </div>
+        
+        <button class="service-btn" onclick="bookService('marketing')">
+            Prenota Consulenza
+        </button>
+    </div>
+</div>
 
             <!-- Home Recording -->
             <div class="service-card">
@@ -1900,7 +1924,7 @@
             };
             
             const message = encodeURIComponent(messages[service] || 'Ciao! Vorrei informazioni sui vostri corsi.');
-            const whatsappUrl = `https://api.whatsapp.com/send/?phone=393519904688&text=${message}&type=phone_number&app_absent=0`;
+            const whatsappUrl = `https://api.whatsapp.com/send/?phone=393463138281&text=${message}&type=phone_number&app_absent=0`;
             window.open(whatsappUrl, '_blank');
         }
 
@@ -1982,27 +2006,32 @@
         `;
         document.head.appendChild(style);
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Intersection Observer for animations (solo su desktop)
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
-                }
-            });
-        }, observerOptions);
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+        }
+    });
+}, observerOptions);
 
-        // Observe elements for animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const animateElements = document.querySelectorAll('.feature-card, .service-card');
-            animateElements.forEach(el => {
-                observer.observe(el);
-            });
+// Observe elements for animation solo su desktop
+document.addEventListener('DOMContentLoaded', () => {
+    // Controlla se siamo su mobile
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) {
+        const animateElements = document.querySelectorAll('.feature-card, .service-card');
+        animateElements.forEach(el => {
+            observer.observe(el);
         });
+    }
+});
     </script>
 </body>
 </html>
