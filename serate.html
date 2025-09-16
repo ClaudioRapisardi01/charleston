@@ -256,7 +256,7 @@
             );
             border-radius: 20px;
             overflow: hidden;
-            cursor: pointer;
+            cursor: default;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255, 215, 0, 0.1);
             backdrop-filter: blur(20px);
@@ -338,24 +338,10 @@
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.6;
             margin-bottom: 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .event-card.expanded .event-description {
-            max-height: 200px;
         }
 
         .event-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
             border-top: 1px solid rgba(255, 215, 0, 0.2);
-        }
-
-        .event-card.expanded .event-details {
-            max-height: 300px;
             padding-top: 1rem;
             margin-top: 1rem;
         }
@@ -397,25 +383,7 @@
         }
 
         .expand-indicator {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(255, 215, 0, 0.2);
-            color: var(--gold);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .event-card.expanded .expand-indicator {
-            transform: rotate(45deg);
-            background: rgba(255, 215, 0, 0.3);
+            display: none;
         }
 
         .no-events {
@@ -578,146 +546,172 @@
         const eventsData = {
             lunedi: [
                 {
-                    title: "Salsa Night",
-                    time: "20:30",
-                    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Una serata dedicata alla passionale salsa cubana con i migliori DJ della città.",
+                    title: "Chiuso",
+                    time: "00:00",
+                    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Il Charleston è chiuso il lunedì per preparare le serate della settimana.",
                     details: [
-                        { icon: "📍", text: "Via Roma 123, Milano" },
-                        { icon: "💰", text: "Ingresso: €15" },
-                        { icon: "🎵", text: "DJ Carlos Martinez" },
-                        { icon: "🍹", text: "Open bar disponibile" }
+                        { icon: "🚪", text: "Locale chiuso" },
+                        { icon: "📅", text: "Ci vediamo martedì!" },
+                        { icon: "💤", text: "Riposo settimanale" },
+                        { icon: "🔄", text: "Preparazione nuove serate" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
-                },
-                {
-                    title: "Corso Principianti",
-                    time: "19:00",
-                    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Lezione di gruppo per chi vuole iniziare il percorso nella danza.",
-                    details: [
-                        { icon: "📍", text: "Studio Charleston" },
-                        { icon: "💰", text: "Costo: €20" },
-                        { icon: "👥", text: "Max 12 persone" },
-                        { icon: "⏱️", text: "Durata: 90 minuti" }
-                    ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: ""
                 }
             ],
             martedi: [
                 {
-                    title: "Bachata Sensual",
+                    title: "Stand Up Sparaminchiate",
                     time: "21:00",
-                    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Serata dedicata alla sensuale bachata con workshop e social dance.",
+                    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Serata di Stand Up Comedy con i migliori comici della scena romana. Risate garantite!",
                     details: [
-                        { icon: "📍", text: "Locale Partner" },
-                        { icon: "💰", text: "Ingresso: €12" },
-                        { icon: "🎭", text: "Workshop incluso" },
-                        { icon: "🌙", text: "Fino alle 02:00" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "€10 senza tessera | €7 con tessera + drink" },
+                        { icon: "🎭", text: "Stand Up Comedy" },
+                        { icon: "🍹", text: "Drink incluso con tessera" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+Sparaminchiate+di+marted%C3%AC&type=phone_number&app_absent=0"
                 }
             ],
             mercoledi: [
                 {
-                    title: "Tango Argentino",
-                    time: "19:30",
-                    image: "https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "L'eleganza del tango argentino in una serata magica.",
+                    title: "Stelle Romane",
+                    time: "20:15",
+                    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Serata di storytelling con racconti e storie della capitale. Un viaggio attraverso le meraviglie di Roma.",
                     details: [
-                        { icon: "📍", text: "Sala Teatro" },
-                        { icon: "💰", text: "Ingresso: €18" },
-                        { icon: "🎼", text: "Orchestra dal vivo" },
-                        { icon: "👔", text: "Dress code elegante" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "€10 senza tessera | €7 con tessera + drink" },
+                        { icon: "📚", text: "Storytelling romano" },
+                        { icon: "⏰", text: "Dalle 20:15 alle 21:45" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stelle+Romane+di+mercoled%C3%AC&type=phone_number&app_absent=0"
                 },
                 {
-                    title: "Pratica Libera",
-                    time: "22:30",
-                    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Spazio libero per praticare e perfezionare i passi appresi.",
+                    title: "Settecomici",
+                    time: "21:45",
+                    image: "https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Prosecuzione serale con stand up comedy e improvvisazione dal vivo fino a mezzanotte.",
                     details: [
-                        { icon: "📍", text: "Studio Charleston" },
-                        { icon: "💰", text: "Ingresso libero" },
-                        { icon: "🎵", text: "Playlist curata" },
-                        { icon: "☕", text: "Caffè gratuito" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "Incluso con Stelle Romane" },
+                        { icon: "🎭", text: "Comedy show dal vivo" },
+                        { icon: "🌙", text: "Dalle 21:45 alle 00:00" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stelle+Romane+%2B+Settecomici+di+mercoled%C3%AC&type=phone_number&app_absent=0"
                 }
             ],
             giovedi: [
                 {
-                    title: "Kizomba Night",
-                    time: "20:00",
-                    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "La sensualità della kizomba africana in una serata indimenticabile.",
+                    title: "Quindie Open Mic",
+                    time: "21:00",
+                    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Open mic night con la crew Quindie. Sali sul palco e mostra il tuo talento musicale!",
                     details: [
-                        { icon: "📍", text: "Club Africano" },
-                        { icon: "💰", text: "Ingresso: €15" },
-                        { icon: "🎤", text: "DJ Africano ospite" },
-                        { icon: "🍷", text: "Happy hour fino alle 21" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "€10 senza tessera | €7 con tessera + drink" },
+                        { icon: "🎤", text: "Open mic night" },
+                        { icon: "⏰", text: "Dalle 21:00 all'1:00" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+il+Quindie+Open+Mic+di+gioved%C3%AC&type=phone_number&app_absent=0"
                 }
             ],
             venerdi: [
                 {
-                    title: "Latin Party",
-                    time: "22:00",
+                    title: "Karakindie",
+                    time: "21:00",
                     image: "https://images.unsplash.com/photo-1594736797933-d0f06ba52984?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "La più grande festa latina della città con tutti i ritmi latinoamericani.",
+                    description: "Karaoke indie per cantare i tuoi brani preferiti in versione alternativa. Divertimento assicurato!",
                     details: [
-                        { icon: "📍", text: "Megaclub Centro" },
-                        { icon: "💰", text: "Ingresso: €20" },
-                        { icon: "🎊", text: "3 sale diverse" },
-                        { icon: "🌟", text: "Show speciali" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "€10 senza tessera | €7 con tessera + drink" },
+                        { icon: "🎤", text: "Karaoke indie" },
+                        { icon: "⏰", text: "Dalle 21:00 alle 23:30" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Karakindie+di+venerd%C3%AC&type=phone_number&app_absent=0"
                 },
                 {
-                    title: "Corso Avanzato",
-                    time: "19:30",
-                    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Lezione avanzata per perfezionare tecnica e stile.",
+                    title: "Live Artista",
+                    time: "21:00",
+                    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Performance dal vivo di artisti emergenti e affermati. Ogni venerdì un nuovo sound!",
                     details: [
-                        { icon: "📍", text: "Studio Charleston" },
-                        { icon: "💰", text: "Costo: €25" },
-                        { icon: "🏆", text: "Livello avanzato" },
-                        { icon: "📚", text: "Materiale incluso" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "€10 senza tessera | €7 con tessera + drink" },
+                        { icon: "🎤", text: "Live performance" },
+                        { icon: "⏰", text: "Dalle 21:00 alle 23:30" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+il+Live+Artista+di+venerd%C3%AC&type=phone_number&app_absent=0"
+                },
+                {
+                    title: "DJ Set Indie",
+                    time: "23:00",
+                    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Prosecuzione serale con DJ set indie per ballare fino a notte fonda. Sempre dopo gli eventi principali.",
+                    details: [
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "🎧", text: "DJ set indie" },
+                        { icon: "💃", text: "Pista da ballo" },
+                        { icon: "🌙", text: "Dalle 23:00 all'1:00" }
+                    ],
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+il+DJ+Set+Indie+di+venerd%C3%AC&type=phone_number&app_absent=0"
                 }
             ],
             sabato: [
                 {
-                    title: "Gran Galà",
-                    time: "21:30",
+                    title: "Spettacolo Burlesque",
+                    time: "20:00",
                     image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "L'evento più elegante della settimana con show e competizioni.",
+                    description: "Elegante spettacolo burlesque con performer professionali. Atmosfera vintage e sensuale.",
                     details: [
-                        { icon: "📍", text: "Grand Hotel Ballroom" },
-                        { icon: "💰", text: "Ingresso: €35" },
-                        { icon: "🏆", text: "Competizione amatoriale" },
-                        { icon: "🥂", text: "Cena inclusa" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
+                        { icon: "🎭", text: "Spettacolo burlesque" },
+                        { icon: "⏰", text: "Dalle 20:00 alle 00:00" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+lo+Spettacolo+Burlesque+di+sabato&type=phone_number&app_absent=0"
+                },
+                {
+                    title: "Serata Brasiliana Live",
+                    time: "21:00",
+                    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Musica brasiliana dal vivo con samba, bossa nova e ritmi tropicali. Viva Brasil!",
+                    details: [
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
+                        { icon: "🇧🇷", text: "Musica brasiliana live" },
+                        { icon: "⏰", text: "Dalle 21:00 all'1:00" }
+                    ],
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+la+Serata+Brasiliana+di+sabato&type=phone_number&app_absent=0"
                 }
             ],
             domenica: [
                 {
-                    title: "Domenica Relax",
+                    title: "Spettacolo Burlesque (Domenica)",
+                    time: "18:00",
+                    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    description: "Spettacolo burlesque domenicale per chiudere il weekend con eleganza e stile.",
+                    details: [
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
+                        { icon: "🎭", text: "Spettacolo burlesque" },
+                        { icon: "⏰", text: "Dalle 18:00 alle 23:00" }
+                    ],
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+lo+Spettacolo+Burlesque+di+domenica&type=phone_number&app_absent=0"
+                },
+                {
+                    title: "Serata Brasiliana Live (Domenica)",
                     time: "18:00",
                     image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Serata tranquilla per chiudere la settimana in dolcezza.",
+                    description: "Musica brasiliana dal vivo per una domenica all'insegna dei ritmi tropicali.",
                     details: [
-                        { icon: "📍", text: "Café Tango" },
-                        { icon: "💰", text: "Consumazione obbligatoria" },
-                        { icon: "☕", text: "Aperitivo incluso" },
-                        { icon: "🎵", text: "Musica dal vivo" }
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
+                        { icon: "🇧🇷", text: "Musica brasiliana live" },
+                        { icon: "⏰", text: "Dalle 18:00 alle 23:00" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393519904688&text=Ciao%21+Vorrei+informazioni+sugli+eventi+Charleston&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+la+Serata+Brasiliana+di+domenica&type=phone_number&app_absent=0"
                 }
             ]
         };
@@ -776,10 +770,9 @@
             }
             
             eventsGrid.innerHTML = events.map(event => `
-                <div class="event-card" onclick="toggleEventCard(this)">
+                <div class="event-card">
                     <div class="event-image">
                         <img src="${event.image}" alt="${event.title}">
-                        <div class="expand-indicator">+</div>
                         <div class="event-time">${event.time}</div>
                     </div>
                     <div class="event-content">
@@ -794,26 +787,15 @@
                                     <span>${detail.text}</span>
                                 </div>
                             `).join('')}
-                            <button class="book-btn" onclick="window.open('${event.bookingLink}', '_blank'); event.stopPropagation();">
-                                Prenota
-                            </button>
+                            ${event.bookingLink ? `
+                                <button class="book-btn" onclick="window.open('${event.bookingLink}', '_blank');">
+                                    Prenota il tuo Tavolo
+                                </button>
+                            ` : ''}
                         </div>
                     </div>
                 </div>
             `).join('');
-        }
-
-        // Funzione per espandere/contrarre le card degli eventi
-        function toggleEventCard(card) {
-            // Chiude tutte le altre card
-            document.querySelectorAll('.event-card').forEach(c => {
-                if (c !== card) {
-                    c.classList.remove('expanded');
-                }
-            });
-            
-            // Toggle della card corrente
-            card.classList.toggle('expanded');
         }
 
         // Inizializzazione della pagina
@@ -829,8 +811,10 @@
             } else {
                 // Fallback al lunedì se non trova il giorno corrente
                 const mondayBtn = document.querySelector('[data-day="lunedi"]');
-                mondayBtn.classList.add('active');
-                loadEvents('lunedi');
+                if (mondayBtn) {
+                    mondayBtn.classList.add('active');
+                    loadEvents('lunedi');
+                }
             }
         });
 
