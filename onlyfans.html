@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnlyFans - Charleston</title>
+    <title>Organizza Eventi - Charleston</title>
     <style>
         * {
             margin: 0;
@@ -176,6 +176,18 @@
             }
         }
 
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
         /* Enhanced Navbar */
         .navbar {
             position: fixed;
@@ -269,7 +281,7 @@
         }
 
         .content-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
         }
@@ -292,66 +304,55 @@
         .subtitle {
             font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1rem;
+            margin-bottom: 3rem;
             font-weight: 300;
             animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .message {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.6s both;
-            font-style: italic;
+            line-height: 1.6;
         }
 
         .emoji-container {
             font-size: 6rem;
             margin: 2rem 0;
             animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
+            cursor: pointer;
         }
 
         .action-buttons {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
             animation: fadeInUp 1s ease-out 0.9s both;
+            flex-direction: column;
+            align-items: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
         }
 
-        .primary-btn {
+        .event-btn {
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             color: var(--black);
-            padding: 1.2rem 3rem;
+            padding: 1.2rem 2.5rem;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            text-transform: none;
+            letter-spacing: 1px;
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
             position: relative;
             overflow: hidden;
             text-decoration: none;
             display: inline-block;
+            margin: 0.5rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
         }
 
-        .primary-btn::before {
+        .event-btn::before {
             content: '';
             position: absolute;
             top: 0;
@@ -362,42 +363,18 @@
             transition: left 0.6s ease;
         }
 
-        .primary-btn:hover::before {
+        .event-btn:hover::before {
             left: 100%;
         }
 
-        .primary-btn:hover {
+        .event-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
         }
 
-        .secondary-btn {
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            backdrop-filter: blur(10px);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .secondary-btn:hover {
-            background: var(--gold);
-            color: var(--black);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
-        }
-
-        .fun-facts {
+        .info-section {
             margin-top: 4rem;
-            padding: 2rem;
+            padding: 2.5rem;
             background: rgba(17, 17, 17, 0.6);
             border-radius: 20px;
             border: 1px solid rgba(255, 215, 0, 0.2);
@@ -405,17 +382,34 @@
             animation: fadeInUp 1s ease-out 1.2s both;
         }
 
-        .fun-facts h3 {
+        .info-section h3 {
             color: var(--gold);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .fun-facts p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            margin-bottom: 0.8rem;
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .info-list li::before {
+            content: '🎉';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
         }
 
         @keyframes fadeInUp {
@@ -444,24 +438,18 @@
             }
 
             .main-title {
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
 
             .subtitle {
                 font-size: 1.2rem;
             }
 
-            .message {
-                font-size: 1rem;
-            }
-
             .action-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 1.5rem;
+                gap: 0.8rem;
             }
 
-            .primary-btn, .secondary-btn {
+            .event-btn {
                 padding: 1rem 2rem;
                 font-size: 1rem;
             }
@@ -469,19 +457,31 @@
             .emoji-container {
                 font-size: 4rem;
             }
+
+            .info-section {
+                padding: 2rem;
+                margin-top: 3rem;
+            }
+
+            .info-section h3 {
+                font-size: 1.3rem;
+            }
+
+            .info-list li {
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
             .main-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
 
             .main-content {
                 padding: 0 1rem;
             }
 
-            .fun-facts {
-                margin-top: 3rem;
+            .info-section {
                 padding: 1.5rem;
             }
         }
@@ -514,33 +514,36 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="content-container">
-            <h1 class="main-title">Oops! 😄</h1>
+            <h1 class="main-title">Organizza il tuo evento al Charleston</h1>
             
-            <p class="subtitle">Qui si balla, non si fa altro! 💃🕺</p>
-            
-            <div class="emoji-container">🎭</div>
-            
-            <p class="message">
-                Ci dispiace deluderti, ma l'unico "OnlyFans" che abbiamo qui <br>
-                sono i ventilatori del nostro studio di danza! 😉<br><br>
-                Vieni a ballare con noi invece! È molto più divertente! ✨
+            <p class="subtitle">
+                Vuoi organizzare un release party? Una festa privata? 
+                <br>Vuoi presentarci il tuo format?
             </p>
-
+            
+            <div class="emoji-container">🎉</div>
+            
             <div class="action-buttons">
-                <a href="index.html" class="primary-btn">
-                    🏠 Torna alla Home
+                <a href="#" class="event-btn" onclick="bookEvent('release-party')">
+                    Dammi info sul release party
                 </a>
-                <a href="serate.html" class="secondary-btn">
-                    🌟 Scopri le Serate
+                <a href="#" class="event-btn" onclick="bookEvent('festa-privata')">
+                    Dammi info sulla festa privata
+                </a>
+                <a href="#" class="event-btn" onclick="bookEvent('format')">
+                    Voglio presentare il mio format
                 </a>
             </div>
 
-            <div class="fun-facts">
-                <h3>Lo sapevi che... 🤔</h3>
-                <p>• Il Charleston è nato negli anni '20 ed è ancora uno dei balli più energici!</p>
-                <p>• Ballare per un'ora brucia più calorie di una sessione di palestra! 💪</p>
-                <p>• La danza migliora l'umore e riduce lo stress meglio di qualsiasi altra attività!</p>
-                <p>• I nostri corsi sono aperti a tutti i livelli, dal principiante al professionista!</p>
+            <div class="info-section">
+                <h3>Affitta il locale e organizza un party privato</h3>
+                <ul class="info-list">
+                    <li>Spazio elegante e versatile perfetto per ogni tipo di evento</li>
+                    <li>Attrezzature audio e luci professionali incluse</li>
+                    <li>Possibilità di catering e servizi personalizzati</li>
+                    <li>Team esperto per supportarti nell'organizzazione</li>
+                    <li>Ambiente unico nel cuore di Roma per i tuoi eventi speciali</li>
+                </ul>
             </div>
         </div>
     </main>
@@ -572,8 +575,21 @@
         }
         animateCursor();
 
+        // Booking functions for events
+        function bookEvent(eventType) {
+            const messages = {
+                'release-party': 'Ciao! Vorrei informazioni per organizzare un release party al Charleston.',
+                'festa-privata': 'Ciao! Vorrei informazioni per organizzare una festa privata al Charleston.',
+                'format': 'Ciao! Vorrei presentare il mio format per un evento al Charleston.'
+            };
+            
+            const message = encodeURIComponent(messages[eventType] || 'Ciao! Vorrei informazioni per organizzare un evento al Charleston.');
+            const whatsappUrl = `https://api.whatsapp.com/send/?phone=393463138281&text=${message}&type=phone_number&app_absent=0`;
+            window.open(whatsappUrl, '_blank');
+        }
+
         // Enhanced Button Interactions
-        document.querySelectorAll('.primary-btn, .secondary-btn, .back-btn').forEach(btn => {
+        document.querySelectorAll('.event-btn, .back-btn').forEach(btn => {
             btn.addEventListener('mouseenter', () => {
                 if (cursor) {
                     cursor.style.transform = 'scale(1.5)';
@@ -650,7 +666,7 @@
         `;
         document.head.appendChild(style);
 
-        // Fun easter egg - shake animation on click
+        // Fun easter egg - celebration animation on click
         document.querySelector('.emoji-container').addEventListener('click', function() {
             this.style.animation = 'none';
             setTimeout(() => {
@@ -663,9 +679,9 @@
         document.querySelector('.main-title').addEventListener('click', function() {
             clickCount++;
             if (clickCount >= 5) {
-                this.textContent = "Davvero insistente! 😂";
+                this.textContent = "Wow! Ti piace proprio organizzare eventi! 🎉";
                 setTimeout(() => {
-                    this.textContent = "Oops! 😄";
+                    this.textContent = "Organizza il tuo evento al Charleston";
                     clickCount = 0;
                 }, 2000);
             }
