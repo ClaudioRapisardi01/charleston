@@ -495,7 +495,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Programmazione dal 30/09/25 al 30/06/26</h1>
+            <h1>Le Nostre Serate</h1>
             <p>Scopri tutti gli eventi settimanali e prenota la tua serata perfetta</p>
         </div>
     </section>
@@ -561,24 +561,37 @@
             ],
             martedi: [
                 {
-                    title: "Stand Up - Sparaminchiate",
+                    title: "Stand Up - Sparaminchiate (Primo Turno)",
                     time: "20:15",
-                    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Serata di Stand Up Comedy con i migliori comici della scena romana. Risate garantite!",
+                    image: "src/img/sparaminchiate.jpg",
+                    description: "Serata di Stand Up Comedy con i migliori comici della scena romana. Primo turno - risate garantite!",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "€10 senza tessera | €7 con tessera + drink" },
                         { icon: "🎭", text: "Stand Up Comedy" },
-                        { icon: "🍹", text: "Drink incluso con tessera" }
+                        { icon: "⏰", text: "Dalle 20:15 alle 21:45" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+-+Sparaminchiate+di+marted%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+-+Sparaminchiate+(Primo+Turno)+di+marted%C3%AC&type=phone_number&app_absent=0"
+                },
+                {
+                    title: "Stand Up - Sparaminchiate (Secondo Turno)",
+                    time: "21:45",
+                    image: "src/img/sparaminchiate.jpg",
+                    description: "Serata di Stand Up Comedy con i migliori comici della scena romana. Secondo turno - risate garantite!",
+                    details: [
+                        { icon: "📍", text: "Charleston Club" },
+                        { icon: "💰", text: "€10 senza tessera | €7 con tessera + drink" },
+                        { icon: "🎭", text: "Stand Up Comedy" },
+                        { icon: "⏰", text: "Dalle 21:45 alle 23:15" }
+                    ],
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+-+Sparaminchiate+(Secondo+Turno)+di+marted%C3%AC&type=phone_number&app_absent=0"
                 }
             ],
             mercoledi: [
                 {
                     title: "Stelle Romane",
                     time: "20:15",
-                    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    image: "src/img/stelle.jpg",
                     description: "Serata di storytelling con racconti e storie della capitale. Un viaggio attraverso le meraviglie di Roma.",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
@@ -591,7 +604,7 @@
                 {
                     title: "Settecomici",
                     time: "21:45",
-                    image: "https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    image: "src/img/settecomici.jpg",
                     description: "Prosecuzione serale con stand up comedy e improvvisazione dal vivo.",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
@@ -606,7 +619,7 @@
                 {
                     title: "Quindie Open Mic",
                     time: "20:30",
-                    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    image: "src/img/quindie.jpg",
                     description: "Open mic night con la crew Quindie. Sali sul palco e mostra il tuo talento musicale!",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
@@ -621,7 +634,7 @@
                 {
                     title: "Karakindie",
                     time: "21:00",
-                    image: "https://images.unsplash.com/photo-1594736797933-d0f06ba52984?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    image: "src/img/venerdi.jpg",
                     description: "Karaoke indie dal vivo per cantare i tuoi brani preferiti in versione alternativa. Divertimento assicurato!",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
@@ -647,7 +660,7 @@
                 {
                     title: "Live Artista",
                     time: "21:00",
-                    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    image: "src/img/venerdi.jpg",
                     description: "Performance dal vivo di artisti emergenti e affermati. Ogni venerdì un nuovo sound!",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
@@ -675,56 +688,43 @@
                 {
                     title: "Spettacolo Burlesque",
                     time: "20:00",
-                    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Elegante spettacolo burlesque con performer professionali. Atmosfera vintage e sensuale.",
+                    image: "src/img/burlesque.jpg",
+                    description: "Elegante spettacolo burlesque con performer professionali. Atmosfera vintage e sensuale. (1 sabato al mese)",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
                         { icon: "🎭", text: "Spettacolo burlesque" },
-                        { icon: "⏰", text: "Dalle 20:00 alle 00:00" }
+                        { icon: "📅", text: "1 sabato al mese" }
                     ],
                     bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+lo+Spettacolo+Burlesque+di+sabato&type=phone_number&app_absent=0"
                 },
                 {
-                    title: "Serata Brasiliana Live",
+                    title: "Roma de Janeiro - Serata Brasiliana Live",
                     time: "21:00",
-                    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Musica brasiliana dal vivo con samba, bossa nova e ritmi tropicali. Viva Brasil!",
+                    image: "src/img/romadejaneiro.jpg",
+                    description: "Roma de Janeiro: musica brasiliana dal vivo con samba, bossa nova e ritmi tropicali. Viva Brasil! (2 volte al mese)",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
                         { icon: "🇧🇷", text: "Musica brasiliana live" },
-                        { icon: "⏰", text: "Dalle 21:00 all'1:00" }
+                        { icon: "📅", text: "2 sabati al mese" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+la+Serata+Brasiliana+di+sabato&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Roma+de+Janeiro+-+Serata+Brasiliana+di+sabato&type=phone_number&app_absent=0"
                 }
             ],
             domenica: [
                 {
-                    title: "Spettacolo Burlesque (Domenica)",
+                    title: "Roma de Janeiro - Serata Brasiliana Live (Domenica)",
                     time: "18:00",
-                    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Spettacolo burlesque domenicale per chiudere il weekend con eleganza e stile.",
-                    details: [
-                        { icon: "📍", text: "Charleston Club" },
-                        { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
-                        { icon: "🎭", text: "Spettacolo burlesque" },
-                        { icon: "⏰", text: "Dalle 18:00 alle 23:00" }
-                    ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+lo+Spettacolo+Burlesque+di+domenica&type=phone_number&app_absent=0"
-                },
-                {
-                    title: "Serata Brasiliana Live (Domenica)",
-                    time: "18:00",
-                    image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    description: "Musica brasiliana dal vivo per una domenica all'insegna dei ritmi tropicali.",
+                    image: "src/img/romadejaneiro.jpg",
+                    description: "Roma de Janeiro: musica brasiliana dal vivo per una domenica all'insegna dei ritmi tropicali. (1 domenica al mese)",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "Gratis con tessera | €10 per tessera" },
                         { icon: "🇧🇷", text: "Musica brasiliana live" },
-                        { icon: "⏰", text: "Dalle 18:00 alle 23:00" }
+                        { icon: "📅", text: "1 domenica al mese" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+la+Serata+Brasiliana+di+domenica&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Roma+de+Janeiro+-+Serata+Brasiliana+di+domenica&type=phone_number&app_absent=0"
                 }
             ]
         };
