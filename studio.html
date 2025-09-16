@@ -871,14 +871,14 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Il Nostro Studio</h1>
-            <p class="subtitle">Uno spazio elegante e professionale dove la musica prende vita</p>
+            <h1>Il Nostro Studio di Produzione</h1>
+            <p class="subtitle">Realizza i tuoi progetti musicali con qualità professionale</p>
             <div class="hero-actions">
                 <button class="primary-btn" onclick="openStudioGallery()">
                     📸 Esplora lo Studio
                 </button>
                 <button class="secondary-btn" onclick="scrollToServices()">
-                    🎵 Scopri i Servizi
+                    🎵 Scopri i Servizi di Produzione
                 </button>
             </div>
         </div>
@@ -954,153 +954,226 @@
     <!-- Services Section -->
     <section class="services-section" id="services">
         <div class="section-header">
-            <h2 class="section-title">I Nostri Servizi Musicali</h2>
+            <h2 class="section-title">I Nostri Servizi di Produzione Musicale</h2>
             <p class="section-subtitle">
-                Offriamo una gamma completa di servizi musicali per tutti i livelli e le età
+                Studio di produzione professionale con servizi completi per artisti e musicisti. 
+                Dalla registrazione al master finale, realizziamo i tuoi progetti musicali
             </p>
         </div>
 
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Lezioni di Chitarra">
+                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Produzione Singola + Mix & Master">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€45</div>
+                    <div class="service-price">€500</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Chitarra</h3>
+                    <h3 class="service-title">Produzione Singola + Mix & Master</h3>
                     <p class="service-description">
-                        Lezioni individuali personalizzate per tutti i livelli, 
-                        dal principiante assoluto al musicista esperto che vuole perfezionare la propria tecnica.
+                        Realizza il tuo singolo con produzione completa, registrazione, mix e master professionale. 
+                        Include 2 sessioni da 3 ore e mezzo in studio (o singola da 8 ore).
                     </p>
                     <ul class="service-features">
-                        <li>Lezioni personalizzate one-on-one</li>
-                        <li>Tutti i generi musicali</li>
-                        <li>Teoria musicale inclusa</li>
-                        <li>Materiale didattico fornito</li>
+                        <li>2 sessioni da 3h30 (o singola da 8h)</li>
+                        <li>Produzione completa</li>
+                        <li>Mix e master professionale</li>
+                        <li>3 revisioni incluse (+€20 per revisioni extra)</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('chitarra')">
-                        Prenota Lezione
+                    <button class="service-btn" onclick="bookService('produzione-singola')">
+                        Prenota Produzione
                     </button>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Basso">
+                    <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="2 Produzioni + Mix & Master">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€50</div>
+                    <div class="service-price">€1080</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Basso</h3>
+                    <h3 class="service-title">2 Produzioni + Mix & Master</h3>
                     <p class="service-description">
-                        Impara le fondamenta del basso elettrico e diventa il groove 
-                        della band con tecniche moderne e classiche.
+                        Pacchetto per due brani completi con produzione, mix e master. 
+                        Include 4 sessioni da 3 ore e mezzo (o 2 da 8 ore).
                     </p>
                     <ul class="service-features">
-                        <li>Tecnica slap e fingerstyle</li>
-                        <li>Groove e timing perfetto</li>
-                        <li>Basso a 4 e 5 corde</li>
-                        <li>Jam session incluse</li>
+                        <li>4 sessioni da 3h30 (o 2 da 8h)</li>
+                        <li>2 produzioni complete</li>
+                        <li>Mix e master per entrambi</li>
+                        <li>3 revisioni per mix (+€20 per extra)</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('basso')">
-                        Prenota Lezione
+                    <button class="service-btn" onclick="bookService('2-produzioni')">
+                        Prenota Pacchetto
                     </button>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1571327073757-af4cf880c5ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Batteria">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fino a 5 Produzioni">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€55</div>
+                    <div class="service-price">€2050</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Batteria</h3>
+                    <h3 class="service-title">Fino a 5 Produzioni + Mix & Master</h3>
                     <p class="service-description">
-                        Dalla tecnica di base ai fill più complessi, 
-                        sviluppa il tuo senso ritmico su una batteria professionale.
+                        Pacchetto completo per un EP o mini album. 
+                        Include 10 sessioni da 3 ore e mezzo (o 5 da 8 ore) per produzioni multiple.
                     </p>
                     <ul class="service-features">
-                        <li>Batteria acustica professionale</li>
-                        <li>Tutti gli stili musicali</li>
-                        <li>Rudimenti e coordinazione</li>
-                        <li>Click e metronomo inclusi</li>
+                        <li>10 sessioni da 3h30 (o 5 da 8h)</li>
+                        <li>Fino a 5 produzioni complete</li>
+                        <li>Mix e master per tutti i brani</li>
+                        <li>3 revisioni per mix (+€20 per extra)</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('batteria')">
-                        Prenota Lezione
+                    <button class="service-btn" onclick="bookService('5-produzioni')">
+                        Prenota EP
                     </button>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Voce">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Più di 5 Produzioni">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€60</div>
+                    <div class="service-price">€3080</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Lezioni di Canto</h3>
+                    <h3 class="service-title">Più di 5 Produzioni + Mix & Master</h3>
                     <p class="service-description">
-                        Sviluppa la tua voce con tecniche professionali di respirazione, 
-                        intonazione e interpretazione per tutti i generi musicali.
+                        Soluzione completa per album completi. 
+                        Include sessioni multiple per produzioni estese con mix e master professionale.
                     </p>
                     <ul class="service-features">
-                        <li>Tecnica vocale professionale</li>
-                        <li>Respirazione e diaframma</li>
-                        <li>Interpretazione e performance</li>
-                        <li>Microfono professionale</li>
+                        <li>Sessioni studio estese</li>
+                        <li>Oltre 5 produzioni complete</li>
+                        <li>Mix e master per tutti i brani</li>
+                        <li>3 revisioni per mix (+€20 per extra)</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('voce')">
-                        Prenota Lezione
+                    <button class="service-btn" onclick="bookService('album-completo')">
+                        Prenota Album
                     </button>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coro">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mix & Master">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€35</div>
+                    <div class="service-price">€150</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Coro & Ensemble</h3>
+                    <h3 class="service-title">Mix & Master</h3>
                     <p class="service-description">
-                        Partecipa al nostro coro e vivi l'esperienza unica 
-                        di cantare in armonia con altri musicisti appassionati.
+                        Servizio dedicato di mix e mastering per tracce già registrate. 
+                        Dai un suono professionale ai tuoi brani.
                     </p>
                     <ul class="service-features">
-                        <li>Coro polifonico</li>
-                        <li>Arrangiamenti originali</li>
-                        <li>Performance dal vivo</li>
-                        <li>Tutti i livelli benvenuti</li>
+                        <li>Mix professionale</li>
+                        <li>Mastering per digital/fisico</li>
+                        <li>3 revisioni incluse</li>
+                        <li>+€20 per ogni revisione extra</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('coro')">
-                        Unisciti al Coro
+                    <button class="service-btn" onclick="bookService('mix-master')">
+                        Prenota Mix & Master
                     </button>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="service-image">
-                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Registrazione">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Registrazione in Presa Diretta">
                     <div class="service-overlay"></div>
-                    <div class="service-price">€120</div>
+                    <div class="service-price">€200</div>
                 </div>
                 <div class="service-content">
-                    <h3 class="service-title">Registrazione Professionale</h3>
+                    <h3 class="service-title">Registrazione in Presa Diretta</h3>
                     <p class="service-description">
-                        Registra i tuoi brani nel nostro studio con attrezzature 
-                        professionali e supporto tecnico specializzato.
+                        Registrazione live di band o ensemble completi. 
+                        Cattura l'energia dal vivo con qualità studio.
                     </p>
                     <ul class="service-features">
-                        <li>Studio di registrazione professionale</li>
-                        <li>Mixaggio e mastering inclusi</li>
-                        <li>Supporto tecnico specializzato</li>
-                        <li>Consegna file digitali</li>
+                        <li>Minimo richiesto di 4h</li>
+                        <li>Registrazione multitraccia</li>
+                        <li>Setup professionale</li>
+                        <li>+€50 per ogni ora extra</li>
                     </ul>
-                    <button class="service-btn" onclick="bookService('registrazione')">
-                        Prenota Sessione
+                    <button class="service-btn" onclick="bookService('presa-diretta')">
+                        Prenota Registrazione
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Copertina Singolo/Album">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€100</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Copertina Singolo/Album</h3>
+                    <p class="service-description">
+                        Design professionale per le copertine dei tuoi progetti musicali. 
+                        Creatività e professionalità per la tua immagine artistica.
+                    </p>
+                    <ul class="service-features">
+                        <li>Design personalizzato</li>
+                        <li>Alta risoluzione</li>
+                        <li>3 revisioni incluse</li>
+                        <li>+€20 per ogni revisione extra</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('copertina')">
+                        Ordina Copertina
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Consulenza Social">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€200</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Consulenza Social + Social Strategy</h3>
+                    <p class="service-description">
+                        Consulenza e strategia per i social media musicali. 
+                        Include pianificazione del piano di pubblicazione per 1 mese.
+                    </p>
+                    <ul class="service-features">
+                        <li>Consulenza personalizzata (1h - €50)</li>
+                        <li>Impostazione strategia</li>
+                        <li>Piano pubblicazione mensile</li>
+                        <li>Supporto specializzato</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('social-strategy')">
+                        Prenota Consulenza
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Videoclip">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">€400</div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Produzione + Post Produzione Videoclip</h3>
+                    <p class="service-description">
+                        Realizzazione completa del tuo videoclip musicale. 
+                        Dalla produzione alla post-produzione per un risultato professionale.
+                    </p>
+                    <ul class="service-features">
+                        <li>Produzione video completa</li>
+                        <li>Post-produzione professionale</li>
+                        <li>Montaggio e color grading</li>
+                        <li>3 revisioni incluse</li>
+                    </ul>
+                    <button class="service-btn" onclick="bookService('videoclip')">
+                        Realizza Videoclip
                     </button>
                 </div>
             </div>
@@ -1218,15 +1291,18 @@
         // Booking functions
         function bookService(service) {
             const messages = {
-                chitarra: 'Ciao! Vorrei prenotare una lezione di chitarra.',
-                basso: 'Ciao! Vorrei prenotare una lezione di basso.',
-                batteria: 'Ciao! Vorrei prenotare una lezione di batteria.',
-                voce: 'Ciao! Vorrei prenotare una lezione di canto.',
-                coro: 'Ciao! Vorrei unirmi al coro.',
-                registrazione: 'Ciao! Vorrei prenotare una sessione di registrazione.'
+                'produzione-singola': 'Ciao! Vorrei informazioni sulla Produzione Singola + Mix & Master (€500).',
+                '2-produzioni': 'Ciao! Vorrei informazioni sul pacchetto 2 Produzioni + Mix & Master (€1080).',
+                '5-produzioni': 'Ciao! Vorrei informazioni sul pacchetto Fino a 5 Produzioni + Mix & Master (€2050).',
+                'album-completo': 'Ciao! Vorrei informazioni sul pacchetto Più di 5 Produzioni + Mix & Master (€3080).',
+                'mix-master': 'Ciao! Vorrei informazioni sul servizio Mix & Master (€150).',
+                'presa-diretta': 'Ciao! Vorrei informazioni sulla Registrazione in Presa Diretta (€200 per 4h).',
+                'copertina': 'Ciao! Vorrei informazioni sul servizio Copertina Singolo/Album (€100).',
+                'social-strategy': 'Ciao! Vorrei informazioni sulla Consulenza Social + Social Strategy (€200).',
+                'videoclip': 'Ciao! Vorrei informazioni sulla Produzione + Post Produzione Videoclip (€400).'
             };
             
-            const message = encodeURIComponent(messages[service] || 'Ciao! Vorrei informazioni sui vostri servizi.');
+            const message = encodeURIComponent(messages[service] || 'Ciao! Vorrei informazioni sui vostri servizi di produzione.');
             const whatsappUrl = `https://api.whatsapp.com/send/?phone=393519904688&text=${message}&type=phone_number&app_absent=0`;
             window.open(whatsappUrl, '_blank');
         }
