@@ -843,10 +843,11 @@
             max-height: 95%;
             background: linear-gradient(145deg, var(--dark-gray), var(--medium-gray));
             border-radius: 25px;
-            padding: 3rem;
+            padding: 2rem;
             border: 1px solid rgba(255, 215, 0, 0.2);
             position: relative;
             animation: modalSlideIn 0.3s ease;
+            overflow: hidden;
         }
 
         @keyframes modalSlideIn {
@@ -862,19 +863,20 @@
 
         .modal-close {
             position: absolute;
-            top: 25px;
-            right: 30px;
-            font-size: 2.5rem;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
             color: var(--gold);
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: rgba(255, 215, 0, 0.1);
+            z-index: 10;
         }
 
         .modal-close:hover {
@@ -886,60 +888,191 @@
         .modal-title {
             color: var(--gold);
             margin-bottom: 2rem;
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-align: center;
             font-weight: 300;
             letter-spacing: 2px;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .gallery-item {
-            aspect-ratio: 4/3;
-            background: var(--medium-gray);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        /* Carosello migliorato */
+        .carousel-container {
             position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
         }
 
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
         }
 
-        .gallery-item:hover::before {
-            opacity: 1;
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            height: 100%;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
-        .gallery-item img {
+        .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 2rem;
+            color: white;
+            transform: translateY(100%);
             transition: transform 0.3s ease;
         }
 
-        .gallery-item:hover img {
+        .carousel-slide:hover .carousel-overlay {
+            transform: translateY(0);
+        }
+
+        .carousel-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+
+        .carousel-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Controlli del carosello */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 215, 0, 0.9);
+            color: var(--black);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .carousel-btn:hover {
+            background: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .carousel-btn.prev {
+            left: 15px;
+        }
+
+        .carousel-btn.next {
+            right: 15px;
+        }
+
+        /* Indicatori del carosello */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .carousel-indicator.active {
+            background: var(--gold);
+            transform: scale(1.2);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .carousel-indicator:hover {
+            background: rgba(255, 215, 0, 0.6);
+        }
+
+        /* Thumbnails */
+        .carousel-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            overflow-x: auto;
+            justify-content: center;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) transparent;
+        }
+
+        .carousel-thumbnails::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel-thumbnails::-webkit-scrollbar-track {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        .carousel-thumbnails::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+
+        .thumbnail {
+            flex-shrink: 0;
+            width: 60px;
+            height: 45px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail.active {
+            border-color: var(--gold);
             transform: scale(1.1);
+        }
+
+        .thumbnail:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            transform: scale(1.05);
         }
 
         /* Responsive Design */
@@ -991,12 +1124,48 @@
 
             .modal-content {
                 margin: 1rem;
-                padding: 2rem;
+                padding: 1.5rem;
+                max-width: calc(100% - 2rem);
             }
 
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1rem;
+            .modal-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .carousel {
+                height: 300px;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .carousel-btn.prev {
+                left: 10px;
+            }
+
+            .carousel-btn.next {
+                right: 10px;
+            }
+
+            .carousel-overlay {
+                padding: 1rem;
+            }
+
+            .carousel-title {
+                font-size: 1rem;
+            }
+
+            .carousel-description {
+                font-size: 0.8rem;
+            }
+
+            .thumbnail {
+                width: 50px;
+                height: 38px;
             }
 
             .teacher-header {
@@ -1027,8 +1196,21 @@
                 margin: 0;
             }
 
-            .gallery-grid {
-                grid-template-columns: 1fr;
+            .modal-content {
+                padding: 1rem;
+            }
+
+            .carousel {
+                height: 250px;
+            }
+
+            .carousel-thumbnails {
+                gap: 0.3rem;
+            }
+
+            .thumbnail {
+                width: 45px;
+                height: 34px;
             }
         }
     </style>
@@ -1152,7 +1334,7 @@
 
         <div class="promo-banner">
             <div class="promo-text">🎵 Nessun costo di iscrizione</div>
-            <div class="promo-subtitle">In omaggio la tessera del circolo ARCI valida in tutti e 4000 i circoli ARCI d’Italia (dà diritto anche a sconto su cinema, teatri, biblioteche e vari articoli al supermercato)</div>
+            <div class="promo-subtitle">In omaggio la tessera del circolo ARCI valida in tutti e 4000 i circoli ARCI d'Italia (dà diritto anche a sconto su cinema, teatri, biblioteche e vari articoli al supermercato)</div>
         </div>
 
         <div class="services-grid">
@@ -1566,57 +1748,57 @@
             </div>
 
             <!-- Music Marketing & Business -->
-<div class="service-card">
-    <div class="service-image">
-        <img src="src/img/pablo.jpg" alt="Music Marketing">
-        <div class="service-overlay"></div>
-        <div class="service-price">
-            <span class="price-original">€29</span>
-            <span class="price-promo">Gratis prima lezione</span>
-        </div>
-    </div>
-    <div class="service-content">
-        <h3 class="service-title">Music Marketing & Business</h3>
-        <p class="service-description">
-            Consulenze personalizzate per creare e far crescere il tuo progetto artistico con Pablo. 
-            Personal branding, social media e strategie di business musicale.
-        </p>
-        <ul class="service-features">
-            <li>Personal branding musicale</li>
-            <li>Strategie social avanzate</li>
-            <li>Content creation con smartphone</li>
-            <li>Business model e monetizzazione</li>
-        </ul>
-        
-        <div class="teacher-info">
-            <div class="teacher-header">
-                <div class="teacher-name">👨‍🏫 Docente: <strong>Pablo</strong></div>
-                <button class="info-btn" onclick="toggleTeacherInfo('pablo-marketing')">Info</button>
-            </div>
-            <div class="teacher-details" id="pablo-marketing">
-                <div class="teacher-profile">
-                    <img src="src/img/pablo.jpg" alt="Pablo" class="teacher-photo">
-                    <div class="teacher-bio">
-                        <p><strong>Esperto di Music Marketing e Business</strong> specializzato nel supporto agli artisti emergenti e nella creazione di strategie digitali efficaci.</p>
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="src/img/pablo.jpg" alt="Music Marketing">
+                    <div class="service-overlay"></div>
+                    <div class="service-price">
+                        <span class="price-original">€29</span>
+                        <span class="price-promo">Gratis prima lezione</span>
                     </div>
                 </div>
-                <h4>Specializzazioni:</h4>
-                <ul>
-                    <li>Personal branding per artisti musicali</li>
-                    <li>Strategie social media avanzate</li>
-                    <li>Content creation e storytelling</li>
-                    <li>Analisi e ottimizzazione delle performance digitali</li>
-                </ul>
-                <h4>Metodo di lavoro:</h4>
-                <p>Approccio pratico e personalizzato, con focus sulla creazione di un'identità artistica autentica e strategie di marketing sostenibili nel lungo termine.</p>
+                <div class="service-content">
+                    <h3 class="service-title">Music Marketing & Business</h3>
+                    <p class="service-description">
+                        Consulenze personalizzate per creare e far crescere il tuo progetto artistico con Pablo. 
+                        Personal branding, social media e strategie di business musicale.
+                    </p>
+                    <ul class="service-features">
+                        <li>Personal branding musicale</li>
+                        <li>Strategie social avanzate</li>
+                        <li>Content creation con smartphone</li>
+                        <li>Business model e monetizzazione</li>
+                    </ul>
+                    
+                    <div class="teacher-info">
+                        <div class="teacher-header">
+                            <div class="teacher-name">👨‍🏫 Docente: <strong>Pablo</strong></div>
+                            <button class="info-btn" onclick="toggleTeacherInfo('pablo-marketing')">Info</button>
+                        </div>
+                        <div class="teacher-details" id="pablo-marketing">
+                            <div class="teacher-profile">
+                                <img src="src/img/pablo.jpg" alt="Pablo" class="teacher-photo">
+                                <div class="teacher-bio">
+                                    <p><strong>Esperto di Music Marketing e Business</strong> specializzato nel supporto agli artisti emergenti e nella creazione di strategie digitali efficaci.</p>
+                                </div>
+                            </div>
+                            <h4>Specializzazioni:</h4>
+                            <ul>
+                                <li>Personal branding per artisti musicali</li>
+                                <li>Strategie social media avanzate</li>
+                                <li>Content creation e storytelling</li>
+                                <li>Analisi e ottimizzazione delle performance digitali</li>
+                            </ul>
+                            <h4>Metodo di lavoro:</h4>
+                            <p>Approccio pratico e personalizzato, con focus sulla creazione di un'identità artistica autentica e strategie di marketing sostenibili nel lungo termine.</p>
+                        </div>
+                    </div>
+                    
+                    <button class="service-btn" onclick="bookService('marketing')">
+                        Prenota Consulenza
+                    </button>
+                </div>
             </div>
-        </div>
-        
-        <button class="service-btn" onclick="bookService('marketing')">
-            Prenota Consulenza
-        </button>
-    </div>
-</div>
 
             <!-- Home Recording -->
             <div class="service-card">
@@ -1782,35 +1964,80 @@
         </div>
     </section>
 
-    <!-- Studio Gallery Modal -->
+    <!-- Studio Gallery Modal con Carosello Migliorato -->
     <div class="modal" id="studioModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeStudioGallery()">&times;</span>
             <h2 class="modal-title">La Nostra Scuola</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 1">
+            
+            <div class="carousel-container">
+                <div class="carousel" id="carousel">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Le slide verranno generate dinamicamente -->
+                    </div>
+                    
+                    <button class="carousel-btn prev" id="prevBtn" onclick="previousSlide()">
+                        ‹
+                    </button>
+                    <button class="carousel-btn next" id="nextBtn" onclick="nextSlide()">
+                        ›
+                    </button>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 2">
+                
+                <div class="carousel-indicators" id="carouselIndicators">
+                    <!-- Gli indicatori verranno generati dinamicamente -->
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1571327073757-af4cf880c5ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 3">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 4">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 5">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Studio 6">
+                
+                <div class="carousel-thumbnails" id="carouselThumbnails">
+                    <!-- Le thumbnails verranno generate dinamicamente -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Database delle immagini della scuola
+        const schoolImages = [
+            {
+                src: "src/img/scuola1.jpg",
+                title: "Sala Principale",
+                description: "La sala principale della scuola con pianoforte a coda e sistema audio professionale"
+            },
+            {
+                src: "src/img/scuola2.jpg", 
+                title: "Studio di Registrazione",
+                description: "Studio di registrazione completamente insonorizzato con console di mixaggio digitale"
+            },
+            {
+                src: "src/img/scuola3.jpg",
+                title: "Aula Chitarra",
+                description: "Aula dedicata alle lezioni di chitarra con amplificatori e strumenti di qualità"
+            },
+            {
+                src: "src/img/scuola4.jpg",
+                title: "Sala Batteria", 
+                description: "Sala batteria con kit acustico completo e sistema di monitoraggio"
+            },
+            {
+                src: "src/img/scuola5.jpg",
+                title: "Aula Canto",
+                description: "Aula per le lezioni di canto con sistema microfonico professionale"
+            },
+            {
+                src: "src/img/scuola6.jpg",
+                title: "Sala Ensemble",
+                description: "Ampia sala per prove di gruppo e formazioni musicali"
+            },
+           
+        ];
+
+        // Variabili del carosello
+        let currentSlide = 0;
+        let carouselTrack;
+        let carouselIndicators;
+        let carouselThumbnails;
+        let autoSlideInterval;
+
         // Custom Cursor
         const cursor = document.getElementById('cursor');
         const cursorTrail = document.getElementById('cursorTrail');
@@ -1865,15 +2092,101 @@
             });
         }
 
+        // Funzioni del carosello
+        function initializeCarousel() {
+            carouselTrack = document.getElementById('carouselTrack');
+            carouselIndicators = document.getElementById('carouselIndicators');
+            carouselThumbnails = document.getElementById('carouselThumbnails');
+
+            // Genera le slide
+            carouselTrack.innerHTML = schoolImages.map((image, index) => `
+                <div class="carousel-slide">
+                    <img src="${image.src}" alt="${image.title}" loading="lazy">
+                    <div class="carousel-overlay">
+                        <h3 class="carousel-title">${image.title}</h3>
+                        <p class="carousel-description">${image.description}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Genera gli indicatori
+            carouselIndicators.innerHTML = schoolImages.map((_, index) => `
+                <div class="carousel-indicator ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
+            `).join('');
+
+            // Genera le thumbnails
+            carouselThumbnails.innerHTML = schoolImages.map((image, index) => `
+                <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})">
+                    <img src="${image.src}" alt="${image.title}">
+                </div>
+            `).join('');
+
+            // Avvia l'auto-slide
+            startAutoSlide();
+        }
+
+        function updateCarousel() {
+            const translateX = -currentSlide * 100;
+            carouselTrack.style.transform = `translateX(${translateX}%)`;
+
+            // Aggiorna indicatori
+            document.querySelectorAll('.carousel-indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+
+            // Aggiorna thumbnails
+            document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % schoolImages.length;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + schoolImages.length) % schoolImages.length;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                nextSlide();
+            }, 5000); // Cambia slide ogni 5 secondi
+        }
+
+        function stopAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+            }
+        }
+
+        function resetAutoSlide() {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+
         // Studio gallery modal functions
         function openStudioGallery() {
             document.getElementById('studioModal').classList.add('active');
             document.body.style.overflow = 'hidden';
+            initializeCarousel();
         }
 
         function closeStudioGallery() {
             document.getElementById('studioModal').classList.remove('active');
             document.body.style.overflow = 'auto';
+            stopAutoSlide();
+            currentSlide = 0; // Reset to first slide
         }
 
         // Close modal when clicking outside
@@ -1889,6 +2202,45 @@
                 closeStudioGallery();
             }
         });
+
+        // Controlli da tastiera per il carosello
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('studioModal').classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    previousSlide();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextSlide();
+                }
+            }
+        });
+
+        // Touch/swipe support per mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.getElementById('carousel').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.getElementById('carousel').addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide(); // Swipe left -> next slide
+                } else {
+                    previousSlide(); // Swipe right -> previous slide
+                }
+            }
+        }
 
         // Teacher info toggle function
         function toggleTeacherInfo(teacherId) {
@@ -1929,7 +2281,7 @@
         }
 
         // Enhanced Button Interactions
-        document.querySelectorAll('.primary-btn, .secondary-btn, .service-btn, .info-btn').forEach(btn => {
+        document.querySelectorAll('.primary-btn, .secondary-btn, .service-btn, .info-btn, .carousel-btn').forEach(btn => {
             btn.addEventListener('mouseenter', () => {
                 if (cursor) {
                     cursor.style.transform = 'scale(1.5)';
@@ -2007,31 +2359,31 @@
         document.head.appendChild(style);
 
         // Intersection Observer for animations (solo su desktop)
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
-        }
-    });
-}, observerOptions);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
 
-// Observe elements for animation solo su desktop
-document.addEventListener('DOMContentLoaded', () => {
-    // Controlla se siamo su mobile
-    const isMobile = window.innerWidth <= 768;
-    
-    if (!isMobile) {
-        const animateElements = document.querySelectorAll('.feature-card, .service-card');
-        animateElements.forEach(el => {
-            observer.observe(el);
+        // Observe elements for animation solo su desktop
+        document.addEventListener('DOMContentLoaded', () => {
+            // Controlla se siamo su mobile
+            const isMobile = window.innerWidth <= 768;
+            
+            if (!isMobile) {
+                const animateElements = document.querySelectorAll('.feature-card, .service-card');
+                animateElements.forEach(el => {
+                    observer.observe(el);
+                });
+            }
         });
-    }
-});
     </script>
 </body>
 </html>
