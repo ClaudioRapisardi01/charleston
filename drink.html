@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drink List - Charleston</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --gold: #FFD700;
+            --gold-dark: #B8860B;
+            --gold-light: #FFEF94;
+            --black: #000000;
+            --dark-gray: #111111;
+            --medium-gray: #222222;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+            background: var(--black);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.5;
+            cursor: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom Cursor - Hidden on mobile */
+        .cursor, .cursor-trail {
+            display: none;
+        }
+
+        /* Advanced Background System */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
+
+        .bg-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, rgba(255, 215, 0, 0.03) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(255, 215, 0, 0.03) 100%);
+            background-size: 100px 100px;
+            animation: meshMove 25s linear infinite;
+            opacity: 0.4;
+        }
+
+        .bg-orbs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold), transparent);
+            filter: blur(40px);
+            animation: orbFloat 15s ease-in-out infinite;
+        }
+
+        .orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+            opacity: 0.1;
+        }
+
+        .orb:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -100px;
+            animation-delay: -5s;
+            opacity: 0.08;
+        }
+
+        .orb:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            bottom: -200px;
+            left: 30%;
+            animation-delay: -10s;
+            opacity: 0.06;
+        }
+
+        .bg-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes meshMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100px, -100px); }
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 0.1;
+            }
+            25% { 
+                transform: translate(30px, -20px) scale(1.1);
+                opacity: 0.15;
+            }
+            50% { 
+                transform: translate(-20px, 30px) scale(0.9);
+                opacity: 0.08;
+            }
+            75% { 
+                transform: translate(40px, 10px) scale(1.05);
+                opacity: 0.12;
+            }
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Navbar - Mobile First */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            padding: 1rem 1.25rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            color: var(--gold);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+            background: rgba(255, 215, 0, 0.25);
+        }
+
+        /* Main Content - Mobile Optimized */
+        .main-content {
+            padding: 80px 1rem 2rem;
+            max-width: 100%;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            line-height: 1.4;
+            padding: 0 1rem;
+        }
+
+        /* Menu Section - Card Style */
+        .menu-section {
+            background: linear-gradient(145deg, 
+                rgba(17, 17, 17, 0.95),
+                rgba(34, 34, 34, 0.9)
+            );
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            margin-right: 0.75rem;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 1.5px;
+        }
+
+        .drink-list {
+            list-style: none;
+        }
+
+        .drink-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            gap: 1rem;
+        }
+
+        .drink-item:last-child {
+            border-bottom: none;
+        }
+
+        .drink-item:active {
+            background: rgba(255, 215, 0, 0.05);
+            margin: 0 -0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            border-radius: 12px;
+        }
+
+        .drink-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .drink-name {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .drink-ingredients {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .drink-price {
+            font-size: 1.25rem;
+            color: var(--gold);
+            font-weight: 700;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Note Section - Mobile Optimized */
+        .note-section {
+            background: rgba(255, 215, 0, 0.12);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .note-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Remove all desktop-specific styles */
+        @media (min-width: 769px) {
+            .main-content {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 100px 2rem 3rem;
+            }
+            
+            .page-title {
+                font-size: 3rem;
+            }
+            
+            .page-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .navbar {
+                padding: 1.5rem 2rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .menu-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Advanced Background System -->
+    <div class="bg-container">
+        <div class="bg-mesh"></div>
+        <div class="bg-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="bg-particles" id="bgParticles"></div>
+    </div>
+
+    <!-- Enhanced Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">CHARLESTON</a>
+            <a href="index.html" class="back-btn">← Torna alla Home</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="hero-section">
+            <h1 class="page-title">Drink List</h1>
+            <p class="page-subtitle">La nostra selezione di cocktail classici, vini e soft drink</p>
+        </div>
+
+        <!-- Cocktail Classici -->
+        <section class="menu-section">
+            <div class="section-header">
+                <span class="section-icon">🍸</span>
+                <h2 class="section-title">Cocktail Classici</h2>
+            </div>
+            <ul class="drink-list">
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Aperol Spritz</div>
+                        <div class="drink-ingredients">Aperol, prosecco, soda</div>
+                    </div>
+                    <div class="drink-price">7€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Americano</div>
+                        <div class="drink-ingredients">Campari bitter, vermouth rosso, soda</div>
+                    </div>
+                    <div class="drink-price">8€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Mito</div>
+                        <div class="drink-ingredients">Campari bitter, vermouth rosso, rabarbaro zucca, angostura bitter</div>
+                    </div>
+                    <div class="drink-price">8€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Negroni</div>
+                        <div class="drink-ingredients">Gin, Campari bitter, vermouth rosso</div>
+                    </div>
+                    <div class="drink-price">8€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Daiquiri</div>
+                        <div class="drink-ingredients">Rum Havana 3, lime, zucchero bianco semolato</div>
+                    </div>
+                    <div class="drink-price">8€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Mai Tai 1944</div>
+                        <div class="drink-ingredients">Rum bianco, rum scuro, lime, orange curacao, orzata, zucchero liquido</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Dark & Stormy</div>
+                        <div class="drink-ingredients">Dark rum, spice, lime, ginger beer, angostura bitter</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Moscow Mule</div>
+                        <div class="drink-ingredients">Vodka, lime, ginger beer</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Gin Fizz</div>
+                        <div class="drink-ingredients">Gin, lime, zucchero liquido, albume, soda</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Margarita</div>
+                        <div class="drink-ingredients">Tequila, lime, cointreau</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Tommy's Margarita</div>
+                        <div class="drink-ingredients">Tequila, lime, sciroppo d'agave</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Paloma</div>
+                        <div class="drink-ingredients">Tequila/mezcal, lime, sciroppo d'agave, succo pompelmo rosa, crusta di sale</div>
+                    </div>
+                    <div class="drink-price">12€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Manhattan</div>
+                        <div class="drink-ingredients">Rye whisky, vermouth rosso, angostura bitter</div>
+                    </div>
+                    <div class="drink-price">12€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Boulevardier</div>
+                        <div class="drink-ingredients">Bourbon whisky, vermouth rosso, Campari bitter, angostura</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Old Fashioned</div>
+                        <div class="drink-ingredients">Bourbon whisky, zucchero semolato, angostura bitter, soda</div>
+                    </div>
+                    <div class="drink-price">10€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Sazerac</div>
+                        <div class="drink-ingredients">Cognac, zucchero semolato, Peychaud's bitter, angostura bitter, soda</div>
+                    </div>
+                    <div class="drink-price">12€</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Vini -->
+        <section class="menu-section">
+            <div class="section-header">
+                <span class="section-icon">🍷</span>
+                <h2 class="section-title">Vini</h2>
+            </div>
+            <ul class="drink-list">
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Vino Bianco</div>
+                        <div class="drink-ingredients">Calice</div>
+                    </div>
+                    <div class="drink-price">7€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Vino Rosso</div>
+                        <div class="drink-ingredients">Calice</div>
+                    </div>
+                    <div class="drink-price">7€</div>
+                </li>
+            </ul>
+            <div class="note-section">
+                <p>💎 Chiedi al bancone per altri vini in bottiglia</p>
+            </div>
+        </section>
+
+        <!-- Soft Drink -->
+        <section class="menu-section">
+            <div class="section-header">
+                <span class="section-icon">🥤</span>
+                <h2 class="section-title">Soft Drink</h2>
+            </div>
+            <ul class="drink-list">
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Schweppes Tonica</div>
+                    </div>
+                    <div class="drink-price">5€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Schweppes Lemon</div>
+                    </div>
+                    <div class="drink-price">5€</div>
+                </li>
+                <li class="drink-item">
+                    <div class="drink-info">
+                        <div class="drink-name">Coca-Cola</div>
+                    </div>
+                    <div class="drink-price">5€</div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // Enhanced Navbar Scroll - Simplified for mobile
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 80) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Dynamic Particle Generation
+        function createParticles() {
+            const particlesContainer = document.getElementById('bgParticles');
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particle.style.animationDelay = '0s';
+                
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 10000);
+            }, 1200);
+        }
+
+        createParticles();
+
+        // Smooth scroll enhancement
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add haptic feedback for iOS (if available)
+        if (window.navigator && window.navigator.vibrate) {
+            document.querySelectorAll('.drink-item, .back-btn').forEach(element => {
+                element.addEventListener('touchstart', () => {
+                    window.navigator.vibrate(10);
+                }, { passive: true });
+            });
+        }
+    </script>
+</body>
+</html>
