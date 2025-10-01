@@ -1907,7 +1907,64 @@
                     </button>
                 </div>
             </div>
-
+            <!-- DJ & Produzione -->
+<div class="service-card">
+    <div class="service-image">
+        <img src="src/img/dj.jpg" alt="DJ & Produzione">
+        <div class="service-overlay"></div>
+        <div class="service-price">
+            <span class="price-original">€29</span>
+            <span class="price-promo">Gratis prima lezione</span>
+        </div>
+    </div>
+    <div class="service-content">
+        <h3 class="service-title">DJ & Produzione</h3>
+        <p class="service-description">
+            Impara l'arte del DJing e della produzione elettronica con Berry. 
+            Dalla tecnica base alla minimal deep tech, sviluppa il tuo sound unico.
+        </p>
+        <ul class="service-features">
+            <li>Basi e tecniche avanzate del DJing</li>
+            <li>Sviluppo stile musicale personale</li>
+            <li>Minimal e minimal deep tech</li>
+            <li>Produzione elettronica</li>
+        </ul>
+        
+        <div class="teacher-info">
+            <div class="teacher-header">
+                <div class="teacher-name">👨‍🏫 Docente: <strong>Berry</strong></div>
+                <button class="info-btn" onclick="toggleTeacherInfo('berry-dj')">Info</button>
+            </div>
+            <div class="teacher-details" id="berry-dj">
+                <div class="teacher-profile">
+                    <img src="src/img/dj.jpg" alt="Berry" class="teacher-photo">
+                    <div class="teacher-bio">
+                        <p><strong>DJ e producer romano</strong>, classe 1988, con una carriera nella scena underground capitolina.</p>
+                    </div>
+                </div>
+                <h4>Esperienza:</h4>
+                <ul>
+                    <li>Ha suonato fin da subito nei migliori club di Roma</li>
+                    <li>Resident DJ del leggendario after hour romano Interferenze</li>
+                    <li>Ha condiviso la consolle con Da Vid, Manda Moor, Sossa, Neverdogs, Youniverse</li>
+                </ul>
+                <h4>Sound e Stile:</h4>
+                <p>La sua energia, il suo sound e la sua selezione musicale tra minimal e minimal deep tech rendono ogni set un viaggio potente e coinvolgente.</p>
+                <h4>Il corso è rivolto a chi vuole:</h4>
+                <ul>
+                    <li>Apprendere le basi e le tecniche avanzate del djing</li>
+                    <li>Sviluppare un proprio stile musicale</li>
+                    <li>Esplorare il mondo della minimal e minimal deep tech</li>
+                    <li>Avvicinarsi alla produzione elettronica</li>
+                </ul>
+            </div>
+        </div>
+        
+        <button class="service-btn" onclick="bookService('djproduzione')">
+            Prenota Lezione
+        </button>
+    </div>
+</div>
             <!-- Combo Home Recording + Mix & Master -->
             <div class="service-card">
                 <div class="service-image">
@@ -2293,6 +2350,7 @@
                 marketing: 'Ciao! Vorrei prenotare una consulenza di Music Marketing & Business.',
                 recording: 'Ciao! Vorrei prenotare una lezione di Home Recording con Termosimone.',
                 mixmaster: 'Ciao! Vorrei prenotare una lezione di Mix & Master con Termosimone.',
+                djproduzione: 'Ciao! Vorrei prenotare una lezione di DJ & Produzione con Berry.',
                 combo: 'Ciao! Vorrei prenotare il corso completo Home Recording + Mix & Master con Termosimone.'
             };
             

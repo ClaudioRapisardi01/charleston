@@ -382,6 +382,31 @@
             background: linear-gradient(135deg, #0D9488, var(--green-dark));
         }
 
+        .programming-btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .programming-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
         .expand-indicator {
             display: none;
         }
@@ -496,7 +521,7 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Le Nostre Serate</h1>
-            <p>Programmazione dal 30/09/25 al 30/06/26</p>
+            <p>Programmazione dal 30/09/25 al 30/06/26</p>
         </div>
     </section>
 
@@ -556,7 +581,8 @@
                         { icon: "💤", text: "Riposo settimanale" },
                         { icon: "🔄", text: "Preparazione nuove serate" }
                     ],
-                    bookingLink: ""
+                    bookingLink: "",
+                    showProgramming: false
                 }
             ],
             martedi: [
@@ -571,7 +597,8 @@
                         { icon: "🎭", text: "Stand Up Comedy" },
                         { icon: "⏰", text: "Dalle 20:15 alle 21:45" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+-+Sparaminchiate+(Primo+Turno)+di+marted%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+-+Sparaminchiate+(Primo+Turno)+di+marted%C3%AC&type=phone_number&app_absent=0",
+                    showProgramming: false
                 },
                 {
                     title: "Stand Up - Sparaminchiate (Secondo Turno)",
@@ -584,7 +611,8 @@
                         { icon: "🎭", text: "Stand Up Comedy" },
                         { icon: "⏰", text: "Dalle 21:45 alle 23:15" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+-+Sparaminchiate+(Secondo+Turno)+di+marted%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stand+Up+-+Sparaminchiate+(Secondo+Turno)+di+marted%C3%AC&type=phone_number&app_absent=0",
+                    showProgramming: false
                 }
             ],
             mercoledi: [
@@ -592,27 +620,29 @@
                     title: "Stelle Romane",
                     time: "20:15",
                     image: "src/img/stelle.jpg",
-                    description: "✨ Stelle Romane ✨ Ogni mercoledì al Charleston Club (San Lorenzo) va in scena il talent più sfacciato di Roma: canto, ballo, magia, poesia, telecinesi e qualsiasi altra follia tu abbia il coraggio di portare sul palco. 🌠 Non è la Corrida, è meglio: qui il pubblico decide se sei una stella che brilla o una cometa che si schianta ridendo. E per chi conquista tutty… c’è un premio pronto ad aspettarlə. 🏆 Vieni a esibirti, a tifare, a fischiare o solo a goderti lo show con un drink in mano: le serate di metà settimana non saranno mai più le stesse. ",
+                    description: "✨ Stelle Romane ✨ Ogni mercoledì al Charleston Club (San Lorenzo) va in scena il talent più sfacciato di Roma: canto, ballo, magia, poesia, telecinesi e qualsiasi altra follia tu abbia il coraggio di portare sul palco. 🌠 Non è la Corrida, è meglio: qui il pubblico decide se sei una stella che brilla o una cometa che si schianta ridendo. E per chi conquista tutty… c'è un premio pronto ad aspettarlə. 🏆 Vieni a esibirti, a tifare, a fischiare o solo a goderti lo show con un drink in mano: le serate di metà settimana non saranno mai più le stesse. ",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "Ingresso con tessera ARCI + contributo €3" },
                         { icon: "📚", text: "Storytelling romano" },
                         { icon: "⏰", text: "Dalle 20:15 alle 21:45" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stelle+Romane+di+mercoled%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stelle+Romane+di+mercoled%C3%AC&type=phone_number&app_absent=0",
+                    showProgramming: false
                 },
                 {
                     title: "Settecomici",
                     time: "21:45",
                     image: "src/img/settecomici.jpg",
-                    description: "😂 SetteComici 😂 Non la solita stand up: sette comici sul palco, tra monologhi pungenti e momenti di pura improvvisazione. A rendere tutto ancora più folle ci saranno commentatori in stile Gialappa’s Band e voci fuori campo pronte a infilarsi ovunque con battute e suoni a sorpresa. Il risultato? Una serata imprevedibile, dove si ride sia di ciò che vedi sia di ciò che senti.",
+                    description: "😂 SetteComici 😂 Non la solita stand up: sette comici sul palco, tra monologhi pungenti e momenti di pura improvvisazione. A rendere tutto ancora più folle ci saranno commentatori in stile Gialappa's Band e voci fuori campo pronte a infilarsi ovunque con battute e suoni a sorpresa. Il risultato? Una serata imprevedibile, dove si ride sia di ciò che vedi sia di ciò che senti.",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "Incluso con Stelle Romane" },
                         { icon: "🎭", text: "Comedy show dal vivo" },
                         { icon: "🌙", text: "Dalle 21:45 alle 23:15" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stelle+Romane+%2B+Settecomici+di+mercoled%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Stelle+Romane+%2B+Settecomici+di+mercoled%C3%AC&type=phone_number&app_absent=0",
+                    showProgramming: false
                 }
             ],
             giovedi: [
@@ -620,14 +650,15 @@
                     title: "Quindie Open Mic",
                     time: "20:30",
                     image: "src/img/quindie.jpg",
-                    description: "🎤 Quindie Open Mic + Jam Session 🎶 Il giovedì al Charleston è il punto di riferimento della scena indipendente romana: un open mic organizzato con cura, che ogni settimana diventa palco e casa per artisty e pubblico. Si parte alle 20:30 con l’Open Mic: musicisty emergenty presentano 3 brani ciascunə e quasi sempre c’è anche un release esclusivo da scoprire in anteprima. Alle 23:00 si accende la Jam Session, che va avanti fino all’1:30: strumenti aperti, palco libero e improvvisazioni che tengono viva l’energia fino a notte fonda. Un giovedì che ha già fatto la storia… e che continua a scriverla, settimana dopo settimana. ✨",
+                    description: "🎤 Quindie Open Mic + Jam Session 🎶 Il giovedì al Charleston è il punto di riferimento della scena indipendente romana: un open mic organizzato con cura, che ogni settimana diventa palco e casa per artisty e pubblico. Si parte alle 20:30 con l'Open Mic: musicisty emergenty presentano 3 brani ciascunə e quasi sempre c'è anche un release esclusivo da scoprire in anteprima. Alle 23:00 si accende la Jam Session, che va avanti fino all'1:30: strumenti aperti, palco libero e improvvisazioni che tengono viva l'energia fino a notte fonda. Un giovedì che ha già fatto la storia… e che continua a scriverla, settimana dopo settimana. ✨",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "€10 senza tessera | €0 con tessera" },
                         { icon: "🎤", text: "Open mic night" },
                         { icon: "⏰", text: "Dalle 20:30 all'1:30" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+il+Quindie+Open+Mic+di+gioved%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+il+Quindie+Open+Mic+di+gioved%C3%AC&type=phone_number&app_absent=0",
+                    showProgramming: false
                 }
             ],
             venerdi: [
@@ -635,30 +666,30 @@
                     title: "Karakindie",
                     time: "21:00",
                     image: "src/img/venerdi.jpg",
-                    description: "🎤 Karakindie 🎶 Il karaoke che non sapevi di voler vivere… due volte al mese! Dimentica le basi scrause: qui c’è una vera band dal vivo che ti accompagna mentre ti spari i pezzi più iconici dell’indie (e non solo 👀). Tu scegli la canzone, noi ti diamo palco, luci e l’energia di un concerto vero: un karaoke che diventa live show, dove per una notte puoi sentirti star. ✨ E non finisce qui: a seguire ci sarà Jam Session o DJ set indie… controlla le Stories per scoprire quale ti aspetta!",
+                    description: "🎤 Karakindie 🎶 Il karaoke che non sapevi di voler vivere… due volte al mese! Dimentica le basi scrause: qui c'è una vera band dal vivo che ti accompagna mentre ti spari i pezzi più iconici dell'indie (e non solo 👀). Tu scegli la canzone, noi ti diamo palco, luci e l'energia di un concerto vero: un karaoke che diventa live show, dove per una notte puoi sentirti star. ✨ E non finisce qui: a seguire ci sarà Jam Session o DJ set indie… controlla le Stories per scoprire quale ti aspetta!",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "€10 senza tessera | €0 con tessera" },
                         { icon: "🎤", text: "Karaoke indie dal vivo" },
                         { icon: "⏰", text: "Dalle 21:00 alle 23:30" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Karakindie+di+venerd%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "",
+                    showProgramming: true
                 },
-                
                 {
                     title: "Live Artista",
                     time: "21:00",
                     image: "src/img/venerdi.jpg",
-                    description: "🎶 Live Artisty – I Venerdì del Charleston 🎶 Sono due venerdì al mese quelli in cui il Charleston si accende con i concerti di artisty scelti dalla direzione artistica Quindie: live speciali, curati e sempre diversi, che portano nuova musica nel cuore di San Lorenzo. E quando il concerto finisce… la notte continua: dalle 23:30 fino all’1:30 la Jam Session apre il palco a improvvisazioni e collaborazioni esplosive. Un appuntamento fisso che rende il venerdì un vero rito musicale. ✨",
+                    description: "🎶 Live Artisty – I Venerdì del Charleston 🎶 Sono due venerdì al mese quelli in cui il Charleston si accende con i concerti di artisty scelti dalla direzione artistica Quindie: live speciali, curati e sempre diversi, che portano nuova musica nel cuore di San Lorenzo. E quando il concerto finisce… la notte continua: dalle 23:30 fino all'1:30 la Jam Session apre il palco a improvvisazioni e collaborazioni esplosive. Un appuntamento fisso che rende il venerdì un vero rito musicale. ✨",
                     details: [
                         { icon: "📍", text: "Charleston Club" },
                         { icon: "💰", text: "Controlla la locandina sul feed e nelle stories per il costo" },
                         { icon: "🎤", text: "Live performance" },
                         { icon: "⏰", text: "Dalle 21:00 alle 23:30" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+il+Live+Artista+di+venerd%C3%AC&type=phone_number&app_absent=0"
+                    bookingLink: "",
+                    showProgramming: true
                 }
-                
             ],
             sabato: [
                 {
@@ -672,7 +703,8 @@
                         { icon: "🎭", text: "Spettacolo burlesque" },
                         { icon: "📅", text: "1 sabato al mese" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+lo+Spettacolo+Burlesque+di+sabato&type=phone_number&app_absent=0"
+                    bookingLink: "",
+                    showProgramming: true
                 },
                 {
                     title: "Roma de Janeiro - Serata Brasiliana Live",
@@ -685,7 +717,8 @@
                         { icon: "🇧🇷", text: "Musica brasiliana live" },
                         { icon: "📅", text: "2 sabati al mese" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Roma+de+Janeiro+-+Serata+Brasiliana+di+sabato&type=phone_number&app_absent=0"
+                    bookingLink: "",
+                    showProgramming: true
                 }
             ],
             domenica: [
@@ -700,7 +733,8 @@
                         { icon: "🇧🇷", text: "Musica brasiliana live" },
                         { icon: "📅", text: "1 domenica al mese" }
                     ],
-                    bookingLink: "https://api.whatsapp.com/send/?phone=393463138281&text=Ciao%21+Vorrei+prenotare+un+tavolo+per+Roma+de+Janeiro+-+Serata+Brasiliana+di+domenica&type=phone_number&app_absent=0"
+                    bookingLink: "",
+                    showProgramming: true
                 }
             ]
         };
@@ -776,7 +810,11 @@
                                     <span>${detail.text}</span>
                                 </div>
                             `).join('')}
-                            ${event.bookingLink ? `
+                            ${event.showProgramming ? `
+                                <a href="https://www.instagram.com/qu.indie/" target="_blank" class="programming-btn">
+                                    📅 Vedi Programmazione
+                                </a>
+                            ` : event.bookingLink ? `
                                 <button class="book-btn" onclick="window.open('${event.bookingLink}', '_blank');">
                                     Prenota il tuo Tavolo
                                 </button>
